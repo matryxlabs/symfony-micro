@@ -1,5 +1,27 @@
+imports:
+    - { resource: parameters.yml }
+
 framework:
     secret: ChangeMe
     templating:
         engines: ['twig']
     profiler: { only_exceptions: false }
+doctrine:
+    dbal:
+        driver:   pdo_mysql
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        auto_mapping: true
+        mappings:
+            AcmeDB1:
+                type:       annotation
+                is_bundle:  false
+                dir:        %kernel.root_dir%/../src/AppBundle/Entity/Campaign
+                prefix:     AppBundle\Entity\Campaign
