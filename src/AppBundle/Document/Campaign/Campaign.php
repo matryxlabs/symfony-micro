@@ -1,19 +1,19 @@
 <?php
 
-namespace AppBundle\Entity\Campaign;
+namespace AppBundle\Document\Campaign;
 
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Campaign.
  *
- * @ORM\Table(name="Campaign")
- * @ORM\Entity
+ * @ODM\Collection(name="Campaign")
+ * @ODM\Document
  * @ORM\HasLifecycleCallbacks
  * @ORM\ChangeTrackingPolicy("NOTIFY")
- * @Gedmo\Loggable(logEntryClass="\AppBundle\Entity\Campaign\CampaignLogEntry")
+ * @Gedmo\Loggable(logEntryClass="\AppBundle\Document\Campaign\CampaignLogEntry")
  */
 class Campaign
 {
@@ -29,34 +29,34 @@ class Campaign
     /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="\AppBundle\Entity\Campaign\CampaignLink", mappedBy="campaign", cascade={"persist"})
+     * @ODM\ReferenceMany(targetEntity="\AppBundle\Document\Campaign\CampaignLink", mappedBy="campaign", cascade={"persist"})
      */
     private $campaignLinks;
 
     /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Campaign\CampaignPublisher", mappedBy="campaign", cascade={"persist"})
+     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\Campaign\CampaignPublisher", mappedBy="campaign", cascade={"persist"})
      */
     private $campaignPublishers;
 
     /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\TrackConversion", mappedBy="campaign", cascade={"persist"})
+     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\TrackConversion", mappedBy="campaign", cascade={"persist"})
      */
     private $trackConversions;
 
     /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Statistics\StatisticsCampaign", mappedBy="campaign", cascade={"persist"})
+     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\Statistics\StatisticsCampaign", mappedBy="campaign", cascade={"persist"})
      */
     private $statisticsCampaigns;
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Statistics\StatisticsCampaignChronology", mappedBy="campaign", cascade={"persist"})
+     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\Statistics\StatisticsCampaignChronology", mappedBy="campaign", cascade={"persist"})
      */
     private $statisticsCampaignChronologies;
 

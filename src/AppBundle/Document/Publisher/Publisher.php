@@ -1,23 +1,23 @@
 <?php
 
-namespace AppBundle\Entity\Publisher;
+namespace AppBundle\Document\Publisher;
 
-use AppBundle\Entity\Lead\Lead;
-use AppBundle\Entity\TrackClick;
-use AppBundle\Entity\TrackConversion;
-use AppBundle\Entity\TrackImpression;
-use AppBundle\Entity\Campaign\CampaignPublisher;
+use AppBundle\Document\Lead\Lead;
+use AppBundle\Document\TrackClick;
+use AppBundle\Document\TrackConversion;
+use AppBundle\Document\TrackImpression;
+use AppBundle\Document\Campaign\CampaignPublisher;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Publisher.
  *
- * @ORM\Table(name="Publisher")
- * @ORM\Entity
+ * @ODM\Collection(name="Publisher")
+ * @ODM\Document
  * @ORM\HasLifecycleCallbacks
  * @ORM\ChangeTrackingPolicy("NOTIFY")
  */
@@ -142,42 +142,42 @@ class Publisher
     /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="\AppBundle\Entity\Lead\Lead", mappedBy="publisher", cascade={"persist"})
+     * @ODM\ReferenceMany(targetEntity="\AppBundle\Document\Lead\Lead", mappedBy="publisher", cascade={"persist"})
      */
     private $leads;
 
     /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="\AppBundle\Entity\Campaign\CampaignPublisher", mappedBy="publisher", cascade={"persist"})
+     * @ODM\ReferenceMany(targetEntity="\AppBundle\Document\Campaign\CampaignPublisher", mappedBy="publisher", cascade={"persist"})
      */
     private $campaignPublishers;
 
     /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="\AppBundle\Entity\TrackClick", mappedBy="publisher", cascade={"persist"})
+     * @ODM\ReferenceMany(targetEntity="\AppBundle\Document\TrackClick", mappedBy="publisher", cascade={"persist"})
      */
     private $trackClicks;
 
     /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="\AppBundle\Entity\TrackConversion", mappedBy="publisher", cascade={"persist"})
+     * @ODM\ReferenceMany(targetEntity="\AppBundle\Document\TrackConversion", mappedBy="publisher", cascade={"persist"})
      */
     private $trackConversions;
 
     /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="\AppBundle\Entity\TrackImpression", mappedBy="publisher", cascade={"persist"})
+     * @ODM\ReferenceMany(targetEntity="\AppBundle\Document\TrackImpression", mappedBy="publisher", cascade={"persist"})
      */
     private $trackImpressions;
 
     /**
      * @var Collection
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Statistics\StatisticsCampaignChronology", mappedBy="publisher", cascade={"persist"})
+     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\Statistics\StatisticsCampaignChronology", mappedBy="publisher", cascade={"persist"})
      */
     private $statisticsCampaignChronologies;
     /**

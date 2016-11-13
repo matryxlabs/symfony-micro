@@ -1,12 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: eric
- * Date: 1/26/16
- * Time: 8:50 AM
- */
-
-namespace AppBundle\Controllers;
+namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -18,7 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class MicroController extends Controller {
 
   /**
-   * @Route("/{limit}")
+   * @Route("/test/{limit}")
    *
    * @param int $limit
    * @return \Symfony\Component\HttpFoundation\Response
