@@ -11,59 +11,63 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ODM\Collection(name="Campaign")
  * @ODM\Document
- * @ORM\HasLifecycleCallbacks
- * @ORM\ChangeTrackingPolicy("NOTIFY")
+ * @ODM\HasLifecycleCallbacks
+ * @ODM\ChangeTrackingPolicy("NOTIFY")
  * @Gedmo\Loggable(logEntryClass="\AppBundle\Document\Campaign\CampaignLogEntry")
  */
 class Campaign
 {
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ODM\Field(name="id", type="string")
+     * @ODM\Id(strategy="UUID", type="string")
      */
     private $id;
 
     /**
      * @var Collection
      *
-     * @ODM\ReferenceMany(targetEntity="\AppBundle\Document\Campaign\CampaignLink", mappedBy="campaign", cascade={"persist"})
+     * @ODM\ReferenceMany(targetDocument="\AppBundle\Document\Campaign\CampaignLink", mappedBy="campaign", cascade={"persist"})
+     * @ODM\EmbedMany(targetDocument="\AppBundle\Document\Campaign\CampaignLink")
      */
     private $campaignLinks;
 
     /**
      * @var Collection
      *
-     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\Campaign\CampaignPublisher", mappedBy="campaign", cascade={"persist"})
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\Campaign\CampaignPublisher", mappedBy="campaign", cascade={"persist"})
+     * @ODM\EmbedMany(targetDocument="AppBundle\Document\Campaign\CampaignPublisher")
      */
     private $campaignPublishers;
 
     /**
      * @var Collection
      *
-     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\TrackConversion", mappedBy="campaign", cascade={"persist"})
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackConversion", mappedBy="campaign", cascade={"persist"})
+     * @ODM\EmbedMany(targetDocument="AppBundle\Document\TrackConversion")
      */
     private $trackConversions;
 
     /**
      * @var Collection
      *
-     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\Statistics\StatisticsCampaign", mappedBy="campaign", cascade={"persist"})
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\Statistics\StatisticsCampaign", mappedBy="campaign", cascade={"persist"})
+     * @ODM\EmbedMany(targetDocument="AppBundle\Document\Statistics\StatisticsCampaign")
      */
     private $statisticsCampaigns;
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\Statistics\StatisticsCampaignChronology", mappedBy="campaign", cascade={"persist"})
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\Statistics\StatisticsCampaignChronology", mappedBy="campaign", cascade={"persist"})
+     * @ODM\EmbedMany(targetDocument="AppBundle\Document\Statistics\StatisticsCampaignChronology")
      */
     private $statisticsCampaignChronologies;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updatedTs", type="datetime")
+     * @ODM\Field(name="updatedTs", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
@@ -103,13 +107,13 @@ class Campaign
     /**
      * Set updatedTs.
      *
-     * @param \Datetime $date
+     * @param \DateTime $updatedTs
      *
      * @return Campaign
      */
-    public function setUpdatedTs(\Datetime $date)
+    public function setUpdatedTs(\DateTime $updatedTs)
     {
-        $this->updatedTs = $date;
+        $this->updatedTs =json_encode($updatedTs);
 
         return $this;
     }
@@ -121,6 +125,6 @@ class Campaign
      */
     public function getUpdatedTs()
     {
-        return $this->updatedTs;
+        return (object) json_decode($this->updatedTs);
     }
 }

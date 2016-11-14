@@ -10,17 +10,16 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ODM\Collection(name="CampaignTag")
  * @ODM\Document
- * @ORM\HasLifecycleCallbacks
- * @ORM\ChangeTrackingPolicy("NOTIFY")
+ * @ODM\HasLifecycleCallbacks
+ * @ODM\ChangeTrackingPolicy("NOTIFY")
  */
 class CampaignTag
 {
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ODM\Field(name="id", type="string")
+     * @ODM\Id(strategy="UUID", type="string")
      */
     private $id;
 

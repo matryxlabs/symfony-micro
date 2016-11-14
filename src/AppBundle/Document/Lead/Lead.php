@@ -12,18 +12,17 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
  * Lead.
  *
  * @ODM\Collection(name="Lead")
- * @ODM\Document
- * @ORM\HasLifecycleCallbacks
- * @ORM\ChangeTrackingPolicy("NOTIFY")
+ * @ODM\EmbeddedDocument()
+ * @ODM\HasLifecycleCallbacks
+ * @ODM\ChangeTrackingPolicy("NOTIFY")
  */
 class Lead
 {
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ODM\Field(name="id", type="string")
+     * @ODM\Id(strategy="UUID", type="string")
      */
 
     protected $id;
@@ -31,17 +30,15 @@ class Lead
     /**
      * @var CampaignLink
      *
-     * @ODM\ReferenceOne(targetEntity="\AppBundle\Document\Campaign\CampaignLink", inversedBy="leads")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="campaignLinkId", referencedColumnName="id")
-     * })
+     * @ODM\ReferenceOne(targetDocument="\AppBundle\Document\Campaign\CampaignLink", inversedBy="leads")
+     * @ODM\EmbedOne(targetDocument="\AppBundle\Document\Campaign\CampaignLink")
      */
     protected $campaignLink;
 
     /**
      * @var CampaignPublisher
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\Campaign\CampaignPublisher", inversedBy="leads")
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Campaign\CampaignPublisher", inversedBy="leads")
      */
     protected $campaignPublisher;
 
@@ -49,24 +46,22 @@ class Lead
     /**
      * @var Collection
      *
-     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\TrackConversion", mappedBy="lead")
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackConversion", mappedBy="lead")
      */
     protected $trackConversion;
 
     /**
      * @var Publisher
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\Publisher\Publisher", inversedBy="leads")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="publisherId", referencedColumnName="id")
-     * })
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Publisher\Publisher", inversedBy="leads")
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Publisher\Publisher")
      */
     protected $publisher;
 
     /**
      * @var Collection
      *
-     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\Lead\LeadFlagHistory", mappedBy="lead")
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\Lead\LeadFlagHistory", mappedBy="lead")
      */
     protected $leadFlagHistory;
 }

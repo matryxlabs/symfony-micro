@@ -4,9 +4,8 @@ namespace AppBundle\Controller;
 
 //use Convertr\CoreBundle\Event\CacheEvent;
 //use Convertr\SharedBundle\Event\ErrorEvent;
-use Symfony\Component\VarDumper\VarDumper;
 use AppBundle\Service\StatsService;
-use AppBundle\Service\TrackService;
+use AppBundle\Service\TrackServiceMongo;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,10 +17,10 @@ use GuzzleHttp\Client;
  * Class ImpressionTrackingController
  */
 
-class ImpressionTrackingController extends Controller
+class ImpressionTrackingMongoController extends Controller
 {
     /**
-     * @Route("/trackme")
+     * @Route("/mongotrackme")
      *
      * Check the parameter's validity, update stats, return pixel.
      *
@@ -32,11 +31,12 @@ class ImpressionTrackingController extends Controller
     public function trackAction(Request $request)
     {
         // Check that the parameters are present
-        $linkId = (int) $request->get('l', $request->get('lid'));
-        $publisherId = (int) $request->get('p', $request->get('pid'));
-        $entityManager= $this->getDoctrine()->getManager();
+        $linkId = $request->get('l', $request->get('lid'));
+        $publisherId = $request->get('p', $request->get('pid'));
+        $documentManager= $this->get('doctrine_mongodb')->getManager();
         $client = new Client();
-        $trackService = new TrackService($entityManager, $client);
+        $trackService = new TrackServiceMongo($documentManager, $client);
+
         if (!$linkId || !$publisherId) {
             return $this->render('AppBundle:Default:index.html.twig', [
                 'message' => 'Publisher or Link not exists',
@@ -46,7 +46,6 @@ class ImpressionTrackingController extends Controller
         }
 
         $publisherImpression = $trackService->getCampaignFromTrackArgs($publisherId, $linkId);
-        VarDumper::dump($publisherImpression);
         if ($publisherImpression == false) {
             //$this->get('convertr.log.track')->info('Publisher or Link not valid for this campaign');
             return $this->render('AppBundle:Default:index.html.twig', [
@@ -58,8 +57,9 @@ class ImpressionTrackingController extends Controller
 
         // We have validated the inputs - now we save the tracking data
         $trackService->addImpression($request, $publisherId, $linkId);
-        // Update campaign stats for adv, pub and chronology
-//        $campaignStats = new StatsService($entityManager);
+//        // Update campaign stats for adv, pub and chronology
+//        exit;
+//        $campaignStats = new StatsService($documentManager);
 //        $campaignStats->updateTracking($campaignId, $publisherId, 1, 0, 0, $linkId, false);
 
         //return $trackService->get1PxGifResponse();

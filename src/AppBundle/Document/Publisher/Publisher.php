@@ -18,66 +18,65 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ODM\Collection(name="Publisher")
  * @ODM\Document
- * @ORM\HasLifecycleCallbacks
- * @ORM\ChangeTrackingPolicy("NOTIFY")
+ * @ODM\HasLifecycleCallbacks
+ * @ODM\ChangeTrackingPolicy("NOTIFY")
  */
 class Publisher
 {
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ODM\Field(name="id", type="string")
+     * @ODM\Id(strategy="UUID", type="string")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="orgname", type="string", length=255)
+     * @ODM\Field(name="orgname", type="string")
      */
     private $orgname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="orgurl", type="string", length=255)
+     * @ODM\Field(name="orgurl", type="string")
      */
     private $orgurl;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="logo", type="string", length=255, nullable=true)
+     * @ODM\Field(name="logo", type="string", nullable=true)
      */
     private $logo;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="taxclass", type="string", length=255, nullable=true)
+     * @ODM\Field(name="taxclass", type="string", nullable=true)
      */
     private $taxclass;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="companyNumber", type="string", nullable=true)
+     * @ODM\Field(name="companyNumber", type="string", nullable=true)
      */
     private $companyNumber;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="notes", type="text", nullable=true)
+     * @ODM\Field(name="notes", type="string", nullable=true)
      */
     private $notes;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updatedTs", type="datetime")
+     * @ODM\Field(name="updatedTs", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
@@ -86,98 +85,104 @@ class Publisher
     /**
      * @var bool
      *
-     * @ORM\Column(name="visible", type="boolean")
+     * @ODM\Field(name="visible", type="boolean")
      */
     private $visible;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="verified", type="string", length=255)
+     * @ODM\Field(name="verified", type="string")
      */
     private $verified;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="source", type="string", length=255)
+     * @ODM\Field(name="source", type="string")
      */
     private $source;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="defaultSubId", type="string", length=255, nullable=true)
+     * @ODM\Field(name="defaultSubId", type="string", nullable=true)
      */
     private $defaultSubId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="defaultLeadTagType", type="string", length=255, nullable=true)
+     * @ODM\Field(name="defaultLeadTagType", type="string", nullable=true)
      */
     private $defaultLeadTagType;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="defaultLeadTag", type="text", nullable=true)
+     * @ODM\Field(name="defaultLeadTag", type="string", nullable=true)
      */
     private $defaultLeadTag;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="signupToken", type="string", length=255, nullable=true)
+     * @ODM\Field(name="signupToken", type="string", nullable=true)
      */
     private $signupToken;
 
     /**
      * @var
      *
-     * @ORM\Column(name="oldPublisherId", type="integer", nullable=true)
+     * @ODM\Field(name="oldPublisherId", type="integer", nullable=true)
      */
     private $oldPublisherId;
 
     /**
      * @var Collection
      *
-     * @ODM\ReferenceMany(targetEntity="\AppBundle\Document\Lead\Lead", mappedBy="publisher", cascade={"persist"})
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\Lead\Lead", mappedBy="publisher", cascade={"persist"})
+     * @ODM\EmbedMany(targetDocument="AppBundle\Document\Lead\Lead")
      */
     private $leads;
 
     /**
      * @var Collection
      *
-     * @ODM\ReferenceMany(targetEntity="\AppBundle\Document\Campaign\CampaignPublisher", mappedBy="publisher", cascade={"persist"})
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\Campaign\CampaignPublisher", mappedBy="publisher", cascade={"persist"})
+     * @ODM\EmbedMany(targetDocument="AppBundle\Document\Campaign\CampaignPublisher")
      */
     private $campaignPublishers;
 
     /**
      * @var Collection
      *
-     * @ODM\ReferenceMany(targetEntity="\AppBundle\Document\TrackClick", mappedBy="publisher", cascade={"persist"})
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackClick", mappedBy="publisher", cascade={"persist"})
+     * @ODM\EmbedMany(targetDocument="AppBundle\Document\TrackClick")
      */
     private $trackClicks;
 
     /**
      * @var Collection
      *
-     * @ODM\ReferenceMany(targetEntity="\AppBundle\Document\TrackConversion", mappedBy="publisher", cascade={"persist"})
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackConversion", mappedBy="publisher", cascade={"persist"})
+     * @ODM\EmbedMany(targetDocument="AppBundle\Document\TrackConversion")
      */
     private $trackConversions;
 
     /**
      * @var Collection
      *
-     * @ODM\ReferenceMany(targetEntity="\AppBundle\Document\TrackImpression", mappedBy="publisher", cascade={"persist"})
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackImpression", mappedBy="publisher", cascade={"persist"})
+     * @ODM\EmbedMany(targetDocument="AppBundle\Document\TrackImpression")
      */
     private $trackImpressions;
 
     /**
      * @var Collection
      *
-     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\Statistics\StatisticsCampaignChronology", mappedBy="publisher", cascade={"persist"})
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\Statistics\StatisticsCampaignChronology", mappedBy="publisher", cascade={"persist"})
+     * @ODM\EmbedMany(targetDocument="AppBundle\Document\Statistics\StatisticsCampaignChronology")
      */
     private $statisticsCampaignChronologies;
     /**

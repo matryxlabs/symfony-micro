@@ -15,7 +15,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  * @ORM\ChangeTrackingPolicy("NOTIFY")
- * @Gedmo\Loggable(logEntryClass="AppBundle\Entity\Campaign\CampaignLogEntry")
  */
 class CampaignPublisher
 {

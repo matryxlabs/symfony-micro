@@ -11,31 +11,30 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ODM\Collection(name="LeadFlagHistory")
  * @ODM\Document
- * @ORM\HasLifecycleCallbacks
- * @ORM\ChangeTrackingPolicy("NOTIFY")
+ * @ODM\HasLifecycleCallbacks
+ * @ODM\ChangeTrackingPolicy("NOTIFY")
  */
 class LeadFlagHistory
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ODM\Field(name="id", type="integer")
+     * @ODM\Id(strategy="INCREMENT", type="integer")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="reason", type="string", length=255)
+     * @ODM\Field(name="reason", type="string")
      */
     private $reason;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdTs", type="datetime")
+     * @ODM\Field(name="createdTs", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
@@ -44,21 +43,21 @@ class LeadFlagHistory
     /**
      * @var LeadFlag
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\Lead\LeadFlag")
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Lead\LeadFlag")
      */
     private $leadFlag;
     
     /**
      * @var Lead
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\Lead\Lead", inversedBy="leadFlagHistory")
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Lead\Lead", inversedBy="leadFlagHistory")
      */
     private $lead;
 
     /**
      * @var Lead
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\TrackConversion", inversedBy="leadFlagHistory")
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\TrackConversion", inversedBy="leadFlagHistory")
      */
     private $trackConversion;
 

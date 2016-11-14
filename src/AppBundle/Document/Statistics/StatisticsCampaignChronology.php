@@ -2,6 +2,7 @@
 
 namespace AppBundle\Document\Statistics;
 
+use AppBundle\Document\Campaign\Campaign;
 use AppBundle\Document\Campaign\CampaignLink;
 use AppBundle\Document\Publisher\Publisher;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
@@ -12,122 +13,121 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ODM\Collection(name="StatisticsCampaignChronology")
  * @ODM\Document
- * @ORM\HasLifecycleCallbacks
- * @ORM\ChangeTrackingPolicy("NOTIFY")
+ * @ODM\HasLifecycleCallbacks
+ * @ODM\ChangeTrackingPolicy("NOTIFY")
  */
 class StatisticsCampaignChronology
 {
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ODM\Field(name="id", type="string")
+     * @ODM\Id(strategy="UUID", type="string")
      */
     private $id;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="reportTs", type="datetime")
+     * @ODM\Field(name="reportTs", type="string")
      */
     private $reportTs;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="liveImpressions", type="integer")
+     * @ODM\Field(name="liveImpressions", type="integer")
      */
     private $liveImpressions = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="liveClicks", type="integer")
+     * @ODM\Field(name="liveClicks", type="integer")
      */
     private $liveClicks = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="liveConversions", type="integer")
+     * @ODM\Field(name="liveConversions", type="integer")
      */
     private $liveConversions = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="testImpressions", type="integer")
+     * @ODM\Field(name="testImpressions", type="integer")
      */
     private $testImpressions = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="testClicks", type="integer")
+     * @ODM\Field(name="testClicks", type="integer")
      */
     private $testClicks = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="testConversions", type="integer")
+     * @ODM\Field(name="testConversions", type="integer")
      */
     private $testConversions = 0;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="conversionsRequiredFromPublisher", type="integer", nullable=true)
+     * @ODM\Field(name="conversionsRequiredFromPublisher", type="integer", nullable=true)
      */
     private $conversionsRequiredFromPublisher;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="firstLiveImpression", type="datetime", nullable=true)
+     * @ODM\Field(name="firstLiveImpression", type="string", nullable=true)
      */
     private $firstLiveImpression;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="firstLiveClick", type="datetime", nullable=true)
+     * @ODM\Field(name="firstLiveClick", type="string", nullable=true)
      */
     private $firstLiveClick;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="firstLiveConversion", type="datetime", nullable=true)
+     * @ODM\Field(name="firstLiveConversion", type="string", nullable=true)
      */
     private $firstLiveConversion;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lastLiveConversion", type="datetime", nullable=true)
+     * @ODM\Field(name="lastLiveConversion", type="string", nullable=true)
      */
     private $lastLiveConversion;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lastLiveImpression", type="datetime", nullable=true)
+     * @ODM\Field(name="lastLiveImpression", type="string", nullable=true)
      */
     private $lastLiveImpression;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lastLiveClick", type="datetime", nullable=true)
+     * @ODM\Field(name="lastLiveClick", type="string", nullable=true)
      */
     private $lastLiveClick;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updatedTs", type="datetime")
+     * @ODM\Field(name="updatedTs", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
@@ -136,37 +136,31 @@ class StatisticsCampaignChronology
     /**
      * @var bool
      *
-     * @ORM\Column(name="visible", type="boolean")
+     * @ODM\Field(name="visible", type="boolean")
      */
     private $visible;
 
     /**
      * @var Campaign
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\Campaign\Campaign", inversedBy="statisticsCampaignChronologies")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="campaignId", referencedColumnName="id")
-     * })
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Campaign\Campaign", inversedBy="statisticsCampaignChronologies")
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Campaign\Campaign")
      */
     private $campaign;
 
     /**
      * @var Publisher
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\Publisher\Publisher", inversedBy="statisticsCampaignChronologies")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="publisherId", referencedColumnName="id", nullable=true)
-     * })
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Publisher\Publisher", inversedBy="statisticsCampaignChronologies")
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Publisher\Publisher")
      */
     private $publisher;
 
     /**
      * @var CampaignLink
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\Campaign\CampaignLink")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="linkId", referencedColumnName="id")
-     * })
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Campaign\CampaignLink")
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Campaign\CampaignLink")
      */
     private $link;
 

@@ -4,6 +4,7 @@ namespace AppBundle\Document;
 
 use AppBundle\Document\Publisher\Publisher;
 use AppBundle\Document\Campaign\CampaignLink;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -13,66 +14,65 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ODM\Collection(name="TrackClick")
  * @ODM\Document
- * @ORM\HasLifecycleCallbacks
- * @ORM\ChangeTrackingPolicy("NOTIFY")
+ * @ODM\HasLifecycleCallbacks
+ * @ODM\ChangeTrackingPolicy("NOTIFY")
  */
 class TrackClick
 {
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ODM\Field(name="id", type="string")
+     * @ODM\Id(strategy="UUID", type="string")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="linkSubId", type="string", length=255, nullable=true)
+     * @ODM\Field(name="linkSubId", type="string", nullable=true)
      */
     private $linkSubId;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="linkEnabled", type="boolean")
+     * @ODM\Field(name="linkEnabled", type="boolean")
      */
     private $linkEnabled;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="campaignEnabled", type="boolean")
+     * @ODM\Field(name="campaignEnabled", type="boolean")
      */
     private $campaignEnabled;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="serverSession", type="string", length=255)
+     * @ODM\Field(name="serverSession", type="string")
      */
     private $serverSession;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="referer", type="text", nullable=true)
+     * @ODM\Field(name="referer", type="string", nullable=true)
      */
     private $referer;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="cookie", type="string", length=255)
+     * @ODM\Field(name="cookie", type="string")
      */
     private $cookie;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdTs", type="datetime")
+     * @ODM\Field(name="createdTs", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
@@ -81,86 +81,80 @@ class TrackClick
     /**
      * @var string
      *
-     * @ORM\Column(name="ip", type="string", length=255)
+     * @ODM\Field(name="ip", type="string")
      */
     private $ip;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="serverData", type="text")
+     * @ODM\Field(name="serverData", type="string")
      */
     private $serverData;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="forwardingUrl", type="string", length=255)
+     * @ODM\Field(name="forwardingUrl", type="string")
      */
     private $forwardingUrl;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="visible", type="boolean")
+     * @ODM\Field(name="visible", type="boolean")
      */
     private $visible;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="fingerprint", type="bigint", nullable=true)
+     * @ODM\Field(name="fingerprint", type="string", nullable=true)
      */
     private $fingerprint;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="unroutable", type="boolean")
+     * @ODM\Field(name="unroutable", type="boolean")
      */
     private $unroutable = false;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
-     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\TrackConversion", mappedBy="trackClick", cascade={"persist"})
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackConversion", mappedBy="trackClick", cascade={"persist"})
      */
     private $trackConversions;
 
     /**
      * @var Publisher
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\Publisher\Publisher", inversedBy="trackClicks")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="publisherId", referencedColumnName="id")
-     * })
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Publisher\Publisher", inversedBy="trackClicks")
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Publisher\Publisher")
      */
     private $publisher;
 
     /**
      * @var CampaignLink
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\Campaign\CampaignLink", inversedBy="trackClicks")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="campaignLinkId", referencedColumnName="id")
-     * })
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Campaign\CampaignLink", inversedBy="trackClicks")
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Campaign\CampaignLink")
      */
     private $campaignLink;
 
     /**
      * @var TrackImpression
      *
-     * @ODM\ReferenceOne(targetEntity="TrackImpression", inversedBy="trackClicks")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="trackImpressionId", referencedColumnName="id")
-     * })
+     * @ODM\ReferenceOne(targetDocument="TrackImpression", inversedBy="trackClicks")
+     * @ODM\EmbedOne(targetDocument="TrackImpression")
      */
     private $trackImpression;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
-     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\TrackClickData", mappedBy="click")
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackClickData", mappedBy="click")
      */
     protected $clickData;
 
@@ -628,7 +622,7 @@ class TrackClick
     /**
      * Get clickData
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getClickData()
     {

@@ -16,25 +16,22 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ODM\Collection(name="CampaignLink")
  * @ODM\Document
- * @ORM\HasLifecycleCallbacks
- * @ORM\ChangeTrackingPolicy("NOTIFY")
- * @Gedmo\Loggable(logEntryClass="AppBundle\Document\Campaign\CampaignLogEntry")
- */
+ * @ODM\HasLifecycleCallbacks
+ * @ODM\ChangeTrackingPolicy("NOTIFY") */
 class CampaignLink
 {
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ODM\Field(name="id", type="string")
+     * @ODM\Id(strategy="UUID", type="string")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ODM\Field(name="name", type="string")
      * @Gedmo\Versioned
      */
     private $name;
@@ -42,7 +39,7 @@ class CampaignLink
     /**
      * @var string
      *
-     * @ORM\Column(name="destination", type="text")
+     * @ODM\Field(name="destination", type="string")
      * @Gedmo\Versioned
      */
     private $destination;
@@ -50,7 +47,7 @@ class CampaignLink
     /**
      * @var bool
      *
-     * @ORM\Column(name="enabled", type="boolean")
+     * @ODM\Field(name="enabled", type="boolean")
      * @Gedmo\Versioned
      */
     private $enabled;
@@ -58,7 +55,7 @@ class CampaignLink
     /**
      * @var string
      *
-     * @ORM\Column(name="placeholder", type="string", length=255, nullable=true)
+     * @ODM\Field(name="placeholder", type="string", nullable=true)
      * @Gedmo\Versioned
      */
     private $placeholder;
@@ -66,7 +63,7 @@ class CampaignLink
     /**
      * @var string
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\Channel")
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Channel")
      * @Gedmo\Versioned
      */
     private $channel;
@@ -74,7 +71,7 @@ class CampaignLink
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdTs", type="datetime")
+     * @ODM\Field(name="createdTs", type="string")
      * @Gedmo\Timestampable(on="create")
      */
     private $createdTs;
@@ -82,7 +79,7 @@ class CampaignLink
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text", nullable=true)
+     * @ODM\Field(name="description", type="string", nullable=true)
      * @Gedmo\Versioned
      */
     private $description;
@@ -90,23 +87,23 @@ class CampaignLink
     /**
      * @var string
      *
-     * @ORM\Column(name="showOnWebsite", type="boolean")
+     * @ODM\Field(name="showOnWebsite", type="boolean")
      */
     private $showOnWebsite = 0;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updatedTs", type="datetime")
+     * @ODM\Field(name="updatedTs", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
     private $updatedTs;
 
-    /**
+    /**setUpdatedTs
      * @var bool
      *
-     * @ORM\Column(name="visible", type="boolean")
+     * @ODM\Field(name="visible", type="boolean")
      * @Gedmo\Versioned
      */
     private $visible;
@@ -114,38 +111,36 @@ class CampaignLink
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\TrackClick", mappedBy="campaignLink", cascade={"persist"})
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackClick", mappedBy="campaignLink", cascade={"persist"})
      */
     private $trackClicks;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\TrackConversion", mappedBy="campaignLink", cascade={"persist"})
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackConversion", mappedBy="campaignLink", cascade={"persist"})
      */
     private $trackConversions;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\TrackImpression", mappedBy="campaignLink", cascade={"persist"})
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackImpression", mappedBy="campaignLink", cascade={"persist"})
      */
     private $trackImpressions;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\Lead\Lead", mappedBy="campaignLink", cascade={"persist"})
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\Lead\Lead", mappedBy="campaignLink", cascade={"persist"})
      */
     private $leads;
 
     /**
      * @var Campaign
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\Campaign\Campaign", inversedBy="campaignLinks")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="campaignId", referencedColumnName="id", nullable=true)
-     * })
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Campaign\Campaign", inversedBy="campaignLinks")
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Campaign\Campaign")
      */
     private $campaign;
     /**
@@ -292,13 +287,13 @@ class CampaignLink
     /**
      * Set createdTs.
      *
-     * @ORM\PrePersist
+     * @ODM\PrePersist
      *
      * @return CampaignLink
      */
     public function setCreatedTs()
     {
-        $this->createdTs = new \DateTime();
+        $this->updatedTs =json_encode(new \DateTime());
 
         return $this;
     }
@@ -310,7 +305,7 @@ class CampaignLink
      */
     public function getCreatedTs()
     {
-        return $this->createdTs;
+        return (object) json_decode($this->createdTs);
     }
 
     /**
@@ -340,13 +335,13 @@ class CampaignLink
     /**
      * Set updatedTs.
      *
-     * @param \Datetime $date
+     * @param \DateTime $updatedTs
      *
      * @return CampaignLink
      */
-    public function setUpdatedTs(\Datetime $date)
+    public function setUpdatedTs(\DateTime $updatedTs)
     {
-        $this->updatedTs = $date;
+        $this->updatedTs =json_encode($updatedTs);
 
         return $this;
     }
@@ -358,7 +353,7 @@ class CampaignLink
      */
     public function getUpdatedTs()
     {
-        return $this->updatedTs;
+        return (object) json_decode($this->updatedTs);
     }
 
     /**

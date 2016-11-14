@@ -32,7 +32,8 @@
         "gedmo/doctrine-extensions": "^2.4",
         "guzzlehttp/guzzle": "^6.2",
         "doctrine/mongodb-odm": "~1.0",
-        "doctrine/mongodb-odm-bundle": "~3.0"
+        "doctrine/mongodb-odm-bundle": "~3.0",
+        "alcaeus/mongo-php-adapter": "^1.0"
 
     },
     "require-dev": {
@@ -66,7 +67,8 @@
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         }
+    },
+    "provide" : {
+        "ext-mongo": "*"
     }
-
-
 }

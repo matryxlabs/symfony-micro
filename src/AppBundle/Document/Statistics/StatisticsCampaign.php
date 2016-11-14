@@ -11,114 +11,113 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ODM\Collection(name="StatisticsCampaign")
  * @ODM\Document
- * @ORM\HasLifecycleCallbacks
+ * @ODM\HasLifecycleCallbacks
  */
 class StatisticsCampaign
 {
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ODM\Field(name="id", type="string")
+     * @ODM\Id(strategy="UUID", type="string")
      */
     private $id;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="liveImpressions", type="integer")
+     * @ODM\Field(name="liveImpressions", type="integer")
      */
     private $liveImpressions;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="liveClicks", type="integer")
+     * @ODM\Field(name="liveClicks", type="integer")
      */
     private $liveClicks;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="liveConversions", type="integer")
+     * @ODM\Field(name="liveConversions", type="integer")
      */
     private $liveConversions;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="testImpressions", type="integer")
+     * @ODM\Field(name="testImpressions", type="integer")
      */
     private $testImpressions;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="testClicks", type="integer")
+     * @ODM\Field(name="testClicks", type="integer")
      */
     private $testClicks;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="testConversions", type="integer")
+     * @ODM\Field(name="testConversions", type="integer")
      */
     private $testConversions;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="conversionsRequired", type="integer")
+     * @ODM\Field(name="conversionsRequired", type="integer")
      */
     private $conversionsRequired;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="firstLiveImpression", type="datetime")
+     * @ODM\Field(name="firstLiveImpression", type="string")
      */
     private $firstLiveImpression;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="firstLiveClick", type="datetime")
+     * @ODM\Field(name="firstLiveClick", type="string")
      */
     private $firstLiveClick;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="firstLiveConversion", type="datetime")
+     * @ODM\Field(name="firstLiveConversion", type="string")
      */
     private $firstLiveConversion;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lastLiveConversion", type="datetime")
+     * @ODM\Field(name="lastLiveConversion", type="string")
      */
     private $lastLiveConversion;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lastLiveImpression", type="datetime")
+     * @ODM\Field(name="lastLiveImpression", type="string")
      */
     private $lastLiveImpression;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lastLiveClick", type="datetime")
+     * @ODM\Field(name="lastLiveClick", type="string")
      */
     private $lastLiveClick;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updatedTs", type="datetime")
+     * @ODM\Field(name="updatedTs", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
@@ -127,17 +126,15 @@ class StatisticsCampaign
     /**
      * @var bool
      *
-     * @ORM\Column(name="visible", type="boolean")
+     * @ODM\Field(name="visible", type="boolean")
      */
     private $visible;
 
     /**
      * @var Campaign
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\Campaign\Campaign", inversedBy="statisticsCampaigns")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="campaignId", referencedColumnName="id")
-     * })
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Campaign\Campaign", inversedBy="statisticsCampaigns")
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Campaign\Campaign")
      */
     private $campaign;
 

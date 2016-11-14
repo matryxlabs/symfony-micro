@@ -3,7 +3,6 @@
 namespace AppBundle\Service;
 
 use Doctrine\ORM\EntityManager;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use GuzzleHttp\Client;
 
@@ -59,7 +58,6 @@ class TrackService
                 AND cl.visible = 1;';
 
         $data = json_encode($connection->fetchAssoc($query, ['publisherId' => $publisherId, 'linkId' => $linkId]));
-
         return json_decode($data, 1);
     }
     /**

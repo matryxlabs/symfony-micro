@@ -2,6 +2,7 @@
 
 namespace AppBundle\Document\Campaign;
 
+use AppBundle\Document\TrackConversion;
 use AppBundle\Document\Lead\Lead;
 use AppBundle\Document\Publisher\Publisher;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,25 +14,23 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ODM\Collection(name="CampaignPublisher")
  * @ODM\Document
- * @ORM\HasLifecycleCallbacks
- * @ORM\ChangeTrackingPolicy("NOTIFY")
- * @Gedmo\Loggable(logEntryClass="AppBundle\Document\Campaign\CampaignLogEntry")
+ * @ODM\HasLifecycleCallbacks
+ * @ODM\ChangeTrackingPolicy("NOTIFY")
  */
 class CampaignPublisher
 {
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ODM\Field(name="id", type="string")
+     * @ODM\Id(strategy="UUID", type="string")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="baseCurrencyPayout", type="decimal", scale=2)
+     * @ODM\Field(name="baseCurrencyPayout", type="string")
      * @Gedmo\Versioned
      */
     private $baseCurrencyPayout;
@@ -39,7 +38,7 @@ class CampaignPublisher
     /**
      * @var string
      *
-     * @ORM\Column(name="payout", type="decimal", scale=2)
+     * @ODM\Field(name="payout", type="string")
      * @Gedmo\Versioned
      */
     private $payout;
@@ -47,7 +46,7 @@ class CampaignPublisher
     /**
      * @var int
      *
-     * @ORM\Column(name="leadsRequired", type="integer")
+     * @ODM\Field(name="leadsRequired", type="integer")
      * @Gedmo\Versioned
      */
     private $leadsRequired;
@@ -55,21 +54,21 @@ class CampaignPublisher
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="startTs", type="datetime")
+     * @ODM\Field(name="startTs", type="string")
      */
     private $startTs;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="endTs", type="datetime", nullable=true)
+     * @ODM\Field(name="endTs", type="string", nullable=true)
      */
     private $endTs;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="signName", type="string", length=255, nullable=true)
+     * @ODM\Field(name="signName", type="string", nullable=true)
      * @Gedmo\Versioned
      */
     private $signName;
@@ -77,7 +76,7 @@ class CampaignPublisher
     /**
      * @var string
      *
-     * @ORM\Column(name="signRole", type="string", length=255, nullable=true)
+     * @ODM\Field(name="signRole", type="string", nullable=true)
      * @Gedmo\Versioned
      */
     private $signRole;
@@ -85,7 +84,7 @@ class CampaignPublisher
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="signedTs", type="datetime", nullable=true)
+     * @ODM\Field(name="signedTs", type="string", nullable=true)
      * @Gedmo\Versioned
      */
     private $signedTs;
@@ -93,7 +92,7 @@ class CampaignPublisher
     /**
      * @var string
      *
-     * @ORM\Column(name="signedIp", type="string", length=255, nullable=true)
+     * @ODM\Field(name="signedIp", type="string", nullable=true)
      * @Gedmo\Versioned
      */
     private $signedIp;
@@ -101,7 +100,7 @@ class CampaignPublisher
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updatedTs", type="datetime")
+     * @ODM\Field(name="updatedTs", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
@@ -110,7 +109,7 @@ class CampaignPublisher
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdTs", type="datetime")
+     * @ODM\Field(name="createdTs", type="string")
      * @Gedmo\Timestampable(on="create")
      */
     private $createdTs;
@@ -118,7 +117,7 @@ class CampaignPublisher
     /**
      * @var string
      *
-     * @ORM\Column(name="terms", type="text", nullable=true)
+     * @ODM\Field(name="terms", type="string", nullable=true)
      * @Gedmo\Versioned
      */
     private $terms;
@@ -126,57 +125,69 @@ class CampaignPublisher
     /**
      * @var string
      *
-     * @ORM\Column(name="linkHash", type="string", length=255)
+     * @ODM\Field(name="linkHash", type="string")
      */
     private $linkHash;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="visible", type="boolean")
+     * @ODM\Field(name="visible", type="boolean")
      */
     private $visible;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="current", type="boolean")
+     * @ODM\Field(name="current", type="boolean")
      */
     private $current = false;
 
     /**
      * @var Campaign
      *
-     * @ODM\ReferenceOne(targetEntity="\AppBundle\Document\Campaign\Campaign", inversedBy="campaignPublishers")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="campaignId", referencedColumnName="id")
-     * })
+     * @ODM\ReferenceOne(targetDocument="\AppBundle\Document\Campaign\Campaign", inversedBy="campaignPublishers")
+     * @ODM\EmbedOne(targetDocument="\AppBundle\Document\Campaign\Campaign")
      */
     private $campaign;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\Lead\Lead", mappedBy="campaignPublisher", cascade={"persist"})
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\Lead\Lead", mappedBy="campaignPublisher", cascade={"persist"})
      */
     private $leads;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\TrackConversion", mappedBy="campaignPublisher", cascade={"persist"})
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackConversion", mappedBy="campaignPublisher", cascade={"persist"})
      */
     private $trackConversion;
 
     /**
      * @var Publisher
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\Publisher\Publisher", inversedBy="campaignPublishers", cascade="persist")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="publisherId", referencedColumnName="id")
-     * })
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Publisher\Publisher", inversedBy="campaignPublishers", cascade="persist")
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Publisher\Publisher")
      */
     private $publisher;
+
+    /**
+     * @return Publisher
+     */
+    public function getPublisher()
+    {
+        return $this->publisher;
+    }
+
+    /**
+     * @param Publisher $publisher
+     */
+    public function setPublisher($publisher)
+    {
+        $this->publisher = $publisher;
+    }
 
     /**
      * Get id.
@@ -245,7 +256,7 @@ class CampaignPublisher
      */
     public function setStartTs($startTs)
     {
-        $this->startTs = $startTs;
+        $this->startTs = json_encode($startTs);
 
         return $this;
     }
@@ -257,7 +268,7 @@ class CampaignPublisher
      */
     public function getStartTs()
     {
-        return $this->startTs;
+        return (object) json_decode($this->startTs);
     }
 
     /**
@@ -269,7 +280,7 @@ class CampaignPublisher
      */
     public function setEndTs($endTs)
     {
-        $this->endTs = $endTs;
+        $this->endTs = json_encode($endTs);
 
         return $this;
     }
@@ -281,7 +292,7 @@ class CampaignPublisher
      */
     public function getEndTs()
     {
-        return $this->endTs;
+        return (object) json_decode($this->endTs);
     }
 
     /**
@@ -341,7 +352,7 @@ class CampaignPublisher
      */
     public function setSignedTs($signedTs)
     {
-        $this->signedTs = $signedTs;
+        $this->signedTs = json_encode($signedTs);
 
         return $this;
     }
@@ -353,7 +364,7 @@ class CampaignPublisher
      */
     public function getSignedTs()
     {
-        return $this->signedTs;
+        return (object) json_decode($this->signedTs);
     }
 
     /**
@@ -389,7 +400,7 @@ class CampaignPublisher
      */
     public function setUpdatedTs(\Datetime $date)
     {
-        $this->updatedTs = $date;
+        $this->updatedTs = json_encode($date);
 
         return $this;
     }
@@ -401,19 +412,19 @@ class CampaignPublisher
      */
     public function getUpdatedTs()
     {
-        return $this->updatedTs;
+        return (object) json_decode($this->updatedTs);
     }
 
     /**
      * Set createdTs.
      *
-     * @ORM\PrePersist
+     * @ODM\PrePersist
      *
      * @return CampaignPublisher
      */
     public function setCreatedTs()
     {
-        $this->createdTs = new \DateTime();
+        $this->createdTs = json_encode(new \DateTime());
 
         return $this;
     }
@@ -425,7 +436,7 @@ class CampaignPublisher
      */
     public function getCreatedTs()
     {
-        return $this->createdTs;
+        return (object) json_decode($this->createdTs);
     }
 
     /**

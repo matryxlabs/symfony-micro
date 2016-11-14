@@ -9,41 +9,38 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
  *
  * @ODM\Collection(name="TrackClickData")
  * @ODM\Document
- * @ORM\HasLifecycleCallbacks
- * @ORM\ChangeTrackingPolicy("NOTIFY")
+ * @ODM\HasLifecycleCallbacks
+ * @ODM\ChangeTrackingPolicy("NOTIFY")
  */
 class TrackClickData
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ODM\Field(name="id", type="integer")
+     * @ODM\Id(strategy="INCREMENT", type="integer")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ODM\Field(name="name", type="string")
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="value", type="string", length=255)
+     * @ODM\Field(name="value", type="string")
      */
     private $value;
 
     /**
      * @var TrackClick
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\TrackClick", inversedBy="clickData")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="clickId", referencedColumnName="id")
-     * })
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\TrackClick", inversedBy="clickData")
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\TrackClick")
      */
     protected $click;
 

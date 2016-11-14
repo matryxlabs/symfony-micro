@@ -2,6 +2,9 @@
 
 namespace AppBundle\Document;
 
+use AppBundle\Document\Campaign\CampaignLink;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -10,38 +13,37 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ODM\Collection(name="TrackImpression")
  * @ODM\Document
- * @ORM\HasLifecycleCallbacks
- * @ORM\ChangeTrackingPolicy("NOTIFY")
+ * @ODM\HasLifecycleCallbacks
+ * @ODM\ChangeTrackingPolicy("NOTIFY")
  */
 class TrackImpression
 {
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ODM\Field(name="id", type="string")
+     * @ODM\Id(strategy="UUID", type="string")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="referer", type="text", nullable=true)
+     * @ODM\Field(name="referer", type="string", nullable=true)
      */
     private $referer;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ip", type="string", length=255)
+     * @ODM\Field(name="ip", type="string")
      */
     private $ip;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updatedTs", type="datetime")
+     * @ODM\Field(name="updatedTs", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
@@ -50,34 +52,30 @@ class TrackImpression
     /**
      * @var bool
      *
-     * @ORM\Column(name="visible", type="boolean")
+     * @ODM\Field(name="visible", type="boolean")
      */
     private $visible;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
-     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\TrackClick", mappedBy="trackImpression", cascade={"persist"})
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackClick", mappedBy="trackImpression", cascade={"persist"})
      */
     private $trackClicks;
 
     /**
      * @var \AppBundle\Document\Publisher\Publisher
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\Publisher\Publisher", inversedBy="trackImpressions")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="publisherId", referencedColumnName="id")
-     * })
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Publisher\Publisher", inversedBy="trackImpressions")
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Publisher\Publisher")
      */
     private $publisher;
 
     /**
-     * @var \AppBundle\Document\Campaign\CampaignLink
+     * @var CampaignLink
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\Campaign\CampaignLink", inversedBy="trackImpressions")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="campaignLinkId", referencedColumnName="id")
-     * })
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Campaign\CampaignLink", inversedBy="trackImpressions")
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Campaign\CampaignLink")
      */
     private $campaignLink;
 
@@ -86,7 +84,7 @@ class TrackImpression
      */
     public function __construct()
     {
-        $this->trackClicks = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->trackClicks = new ArrayCollection();
     }
 
     /**

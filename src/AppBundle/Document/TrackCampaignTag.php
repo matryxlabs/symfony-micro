@@ -2,6 +2,8 @@
 
 namespace AppBundle\Document;
 
+use AppBundle\Document\Campaign\Campaign;
+use AppBundle\Document\Campaign\CampaignTag;
 use AppBundle\Document\Lead\Lead;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -10,54 +12,53 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ODM\Collection(name="TrackCampaignTag")
  * @ODM\Document
- * @ORM\HasLifecycleCallbacks
- * @ORM\ChangeTrackingPolicy("NOTIFY")
+ * @ODM\HasLifecycleCallbacks
+ * @ODM\ChangeTrackingPolicy("NOTIFY")
  */
 class TrackCampaignTag
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ODM\Field(name="id", type="integer")
+     * @ODM\Id(strategy="INCREMENT", type="integer")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="request", type="text")
+     * @ODM\Field(name="request", type="string")
      */
     private $request;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="response", type="text")
+     * @ODM\Field(name="response", type="string")
      */
     private $response;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updateTs", type="datetime")
+     * @ODM\Field(name="updateTs", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
     private $updateTs;
 
     /**
-     * @var int
+     * @var Lead
      *
-     * @ODM\ReferenceOne(targetEntity="\AppBundle\Document\Lead\Lead")
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Lead\Lead")
      */
     private $lead;
 
     /**
-     * @var int
+     * @var CampaignTag
      *
-     * @ODM\ReferenceOne(targetEntity="\AppBundle\Document\TrackCampaignTag")
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\TrackCampaignTag")
      */
     private $campaignTag;
 
@@ -120,27 +121,27 @@ class TrackCampaignTag
     }
 
     /**
-     * Set updateTs.
+     * Set updatedTs.
      *
-     * @param \DateTime $updateTs
+     * @param \DateTime $updatedTs
      *
      * @return TrackCampaignTag
      */
-    public function setUpdateTs($updateTs)
+    public function setUpdatedTs($updatedTs)
     {
-        $this->updateTs = $updateTs;
+        $this->updatedTs =json_encode($updatedTs);
 
         return $this;
     }
 
     /**
-     * Get updateTs.
+     * Get updatedTs.
      *
      * @return \DateTime
      */
-    public function getUpdateTs()
+    public function getUpdatedTs()
     {
-        return $this->updateTs;
+        return (object) json_decode($this->updatedTs);
     }
 
     /**

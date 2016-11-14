@@ -14,45 +14,44 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ODM\Collection(name="TrackPublisherConversionTag")
  * @ODM\Document
- * @ORM\HasLifecycleCallbacks
- * @ORM\ChangeTrackingPolicy("NOTIFY")
+ * @ODM\HasLifecycleCallbacks
+ * @ODM\ChangeTrackingPolicy("NOTIFY")
  */
 class TrackPublisherConversionTag
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ODM\Field(name="id", type="integer")
+     * @ODM\Id(strategy="INCREMENT", type="integer")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="linkSubId", type="string", length=255, nullable=true)
+     * @ODM\Field(name="linkSubId", type="string", nullable=true)
      */
     private $linkSubId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="request", type="text")
+     * @ODM\Field(name="request", type="string")
      */
     private $request;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="response", type="text")
+     * @ODM\Field(name="response", type="string")
      */
     private $response;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updateTs", type="datetime")
+     * @ODM\Field(name="updateTs", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
@@ -61,61 +60,53 @@ class TrackPublisherConversionTag
     /**
      * @var string
      *
-     * @ORM\Column(name="ip", type="string", length=255)
+     * @ODM\Field(name="ip", type="string")
      */
     private $ip;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="visible", type="boolean")
+     * @ODM\Field(name="visible", type="boolean")
      */
     private $visible;
 
     /**
      * @var Publisher
      *
-     * @ODM\ReferenceOne(targetEntity="\AppBundle\Document\Publisher\Publisher")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="publisherId", referencedColumnName="id")
-     * })
+     * @ODM\ReferenceOne(targetDocument="\AppBundle\Document\Publisher\Publisher")
+     * @ODM\EmbedOne(targetDocument="\AppBundle\Document\Publisher\Publisher")
      */
     private $publisher;
 
     /**
      * @var Campaign
      *
-     * @ODM\ReferenceOne(targetEntity="\AppBundle\Document\Campaign\Campaign")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="campaignId", referencedColumnName="id")
-     * })
+     * @ODM\ReferenceOne(targetDocument="\AppBundle\Document\Campaign\Campaign")
+     * @ODM\EmbedOne(targetDocument="\AppBundle\Document\Campaign\Campaign")
      */
     private $campaign;
 
     /**
      * @var CampaignLink
      *
-     * @ODM\ReferenceOne(targetEntity="\AppBundle\Document\Campaign\CampaignLink")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="campaignLinkId", referencedColumnName="id")
-     * })
+     * @ODM\ReferenceOne(targetDocument="\AppBundle\Document\Campaign\CampaignLink")
+     * @ODM\EmbedOne(targetDocument="\AppBundle\Document\Campaign\CampaignLink")
      */
     private $campaignLink;
 
     /**
      * @var Lead
      *
-     * @ODM\ReferenceOne(targetEntity="\AppBundle\Document\Lead\Lead")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="leadId", referencedColumnName="id")
-     * })
+     * @ODM\ReferenceOne(targetDocument="\AppBundle\Document\Lead\Lead")
+     * @ODM\EmbedOne(targetDocument="\AppBundle\Document\Lead\Lead")
      */
     private $lead;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="orderId", type="string", length=255, nullable=true)
+     * @ODM\Field(name="orderId", type="string", nullable=true)
      */
     private $orderId;
 

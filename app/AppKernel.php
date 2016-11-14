@@ -26,7 +26,7 @@ class AppKernel extends Kernel
             new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new \Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle(),
             new \Symfony\Bundle\MonologBundle\MonologBundle(),
-            new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
+            new \Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
             new \AppBundle\AppBundle(),
         ];
 

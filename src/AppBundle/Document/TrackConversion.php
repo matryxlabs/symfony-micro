@@ -19,123 +19,122 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ODM\Collection(name="TrackConversion")
  * @ODM\Document
- * @ORM\HasLifecycleCallbacks
- * @ORM\ChangeTrackingPolicy("NOTIFY")
+ * @ODM\HasLifecycleCallbacks
+ * @ODM\ChangeTrackingPolicy("NOTIFY")
  */
 class TrackConversion
 {
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ODM\Field(name="id", type="string")
+     * @ODM\Id(strategy="UUID", type="string")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="linkSubId", type="string", length=255, nullable=true)
+     * @ODM\Field(name="linkSubId", type="string", nullable=true)
      */
     private $linkSubId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="orderId", type="string", length=255)
+     * @ODM\Field(name="orderId", type="string")
      */
     private $orderId;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="linkActive", type="boolean")
+     * @ODM\Field(name="linkActive", type="boolean")
      */
     private $linkActive;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="campaignActive", type="boolean")
+     * @ODM\Field(name="campaignActive", type="boolean")
      */
     private $campaignActive;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="referer", type="string", length=255, nullable=true)
+     * @ODM\Field(name="referer", type="string", nullable=true)
      */
     private $referer;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="cookie", type="string", length=255, nullable=true)
+     * @ODM\Field(name="cookie", type="string", nullable=true)
      */
     private $cookie;
 
     /**
      * @var string
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\Channel")
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Channel")
      */
     private $channel;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="linkIp", type="string", length=255)
+     * @ODM\Field(name="linkIp", type="string")
      */
     private $linkIp;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="serverData", type="string", length=255)
+     * @ODM\Field(name="serverData", type="string")
      */
     private $serverData;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="forwardingUrl", type="string", length=255, nullable=true)
+     * @ODM\Field(name="forwardingUrl", type="string", nullable=true)
      */
     private $forwardingUrl;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="basketValue", type="decimal", scale=2, nullable=true)
+     * @ODM\Field(name="basketValue", type="string", nullable=true)
      */
     private $basketValue;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="basketCurrency", type="string", length=255)
+     * @ODM\Field(name="basketCurrency", type="string")
      */
     private $basketCurrency;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="tagFiringUrl", type="string", length=255)
+     * @ODM\Field(name="tagFiringUrl", type="string")
      */
     private $tagFiringUrl;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="tagCookie", type="string", length=255, nullable=true)
+     * @ODM\Field(name="tagCookie", type="string", nullable=true)
      */
     private $tagCookie;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdTs", type="datetime")
+     * @ODM\Field(name="createdTs", type="string")
      * @Gedmo\Timestampable(on="create")
      */
     private $createdTs;
@@ -143,14 +142,14 @@ class TrackConversion
     /**
      * @var string
      *
-     * @ORM\Column(name="tagIp", type="string", length=255)
+     * @ODM\Field(name="tagIp", type="string")
      */
     private $tagIp;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updatedAt", type="datetime")
+     * @ODM\Field(name="updatedAt", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
@@ -159,99 +158,89 @@ class TrackConversion
     /**
      * @var bool
      *
-     * @ORM\Column(name="visible", type="boolean")
+     * @ODM\Field(name="visible", type="boolean")
      */
     private $visible;
 
     /**
      * @var Publisher
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\Publisher\Publisher", inversedBy="trackConversions")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="publisherId", referencedColumnName="id", nullable=true)
-     * })
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Publisher\Publisher", inversedBy="trackConversions")
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Publisher\Publisher")
      */
     private $publisher;
 
     /**
      * @var Campaign
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\Campaign\Campaign", inversedBy="trackConversions")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="campaignId", referencedColumnName="id")
-     * })
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Campaign\Campaign", inversedBy="trackConversions")
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Campaign\Campaign")
      */
     private $campaign;
 
     /**
      * @var TrackClick
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\TrackClick", inversedBy="trackConversions")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="trackClickId", referencedColumnName="id", nullable=true)
-     * })
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\TrackClick", inversedBy="trackConversions")
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\TrackClick")
      */
     private $trackClick;
 
     /**
      * @var CampaignLink
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\Campaign\CampaignLink", inversedBy="trackConversions")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="campaignLinkId", referencedColumnName="id")
-     * })
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Campaign\CampaignLink", inversedBy="trackConversions")
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Campaign\CampaignLink")
      */
     private $campaignLink;
 
     /**
      * @var Lead
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\Lead\Lead", inversedBy="trackConversion")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="leadId", referencedColumnName="id")
-     * })
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Lead\Lead", inversedBy="trackConversion")
+     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Lead\Lead")
      */
     private $lead;
 
     /**
      * @var CampaignPublisher
      *
-     * @ODM\ReferenceOne(targetEntity="AppBundle\Document\Campaign\CampaignPublisher", inversedBy="trackConversion")
+     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Campaign\CampaignPublisher", inversedBy="trackConversion")
      */
     private $campaignPublisher;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="publisherPayout", type="decimal", scale=2, nullable=true)
+     * @ODM\Field(name="publisherPayout", type="string", nullable=true)
      */
     private $publisherPayout;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="advertiserPayout", type="decimal", scale=2, nullable=true)
+     * @ODM\Field(name="advertiserPayout", type="string", nullable=true)
      */
     private $advertiserPayout;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="baseCurrencyPublisherPayout", type="decimal", scale=2, nullable=true)
+     * @ODM\Field(name="baseCurrencyPublisherPayout", type="string", nullable=true)
      */
     private $baseCurrencyPublisherPayout;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="baseCurrencyAdvertiserPayout", type="decimal", scale=2, nullable=true)
+     * @ODM\Field(name="baseCurrencyAdvertiserPayout", type="string", nullable=true)
      */
     private $baseCurrencyAdvertiserPayout;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
-     * @ODM\ReferenceMany(targetEntity="AppBundle\Document\Lead\LeadFlagHistory", mappedBy="trackConversion")
+     * @ODM\ReferenceMany(targetDocument="AppBundle\Document\Lead\LeadFlagHistory", mappedBy="trackConversion")
      */
     private $leadFlagHistory;
 

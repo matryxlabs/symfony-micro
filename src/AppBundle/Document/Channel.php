@@ -10,8 +10,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ODM\Collection(name="Channel")
  * @ODM\Document
- * @ORM\HasLifecycleCallbacks
- * @ORM\ChangeTrackingPolicy("NOTIFY")
+ * @ODM\HasLifecycleCallbacks
+ * @ODM\ChangeTrackingPolicy("NOTIFY")
  */
 class Channel
 {
@@ -26,23 +26,22 @@ class Channel
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ODM\Field(name="id", type="integer")
+     * @ODM\Id(strategy="INCREMENT", type="integer")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ODM\Field(name="name", type="string")
      */
     private $name;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updatedTs", type="datetime")
+     * @ODM\Field(name="updatedTs", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
@@ -91,7 +90,7 @@ class Channel
      */
     public function setUpdatedTs($updatedTs)
     {
-        $this->updatedTs = $updatedTs;
+        $this->updatedTs =json_encode($updatedTs);
 
         return $this;
     }
@@ -103,6 +102,6 @@ class Channel
      */
     public function getUpdatedTs()
     {
-        return $this->updatedTs;
+        return (object) json_decode($this->updatedTs);
     }
 }
