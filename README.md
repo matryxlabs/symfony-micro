@@ -1,14 +1,13 @@
 # Symfony MicroKernel Skeleton
 ## Not populated database
 
-## Mongodb benchmark (%0 failed)
+## Mongodb benchmark (0% failed)
 <pre>
 Server Software:        Apache/2.4.18
 Server Hostname:        symfony-micro.dev
 Server Port:            80
 
-Document Path:          /mongotrackme?lid=d7a394b5c5153ef9a95562c48b0466c7&pid=77831e28477f3f4f8060f410333d1e6f
-Document Length:        495 bytes
+Document Path:          /mongotrackme?lid=d7a394b5c5153ef9a95562c48b0466c7&pid=77831...
 
 Concurrency Level:      100
 Time taken for tests:   77.728 seconds
