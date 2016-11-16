@@ -85,13 +85,13 @@ class TrackServiceMongo
         $dm = $this->dm;
         $now = new \DateTime();
         $impression = new TrackImpression();
-        $impression->setIp($request->server->get('REMOTE_ADDR'));
-        $impression->setReferer($request->server->get('HTTP_REFERER', null));
-        $impression->setPublisher($publisherId);
-        $impression->setCampaignLink($linkId);
-        $impression->setUpdatedTs($now->format('Y-m-d H:i:s'));
-        $impression->setVisible(1);
+        $impression->ip = $request->server->get('REMOTE_ADDR');
+        $impression->referer = $request->server->get('HTTP_REFERER', null);
+        $impression->publisher = $publisherId;
+        $impression->campaignLink = $linkId;
+        $impression->updatedTs = $now->format('Y-m-d H:i:s');
+        $impression->visible = true;
+        $dm->persist($impression);
         $dm->flush();
-
     }
 }

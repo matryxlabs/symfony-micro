@@ -23,21 +23,21 @@ class TrackCampaignTag
      * @ODM\Field(name="id", type="integer")
      * @ODM\Id(strategy="INCREMENT", type="integer")
      */
-    private $id;
+    public $id;
 
     /**
      * @var string
      *
      * @ODM\Field(name="request", type="string")
      */
-    private $request;
+    public $request;
 
     /**
      * @var string
      *
      * @ODM\Field(name="response", type="string")
      */
-    private $response;
+    public $response;
 
     /**
      * @var \DateTime
@@ -46,21 +46,21 @@ class TrackCampaignTag
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
-    private $updateTs;
+    public $updateTs;
 
     /**
      * @var Lead
      *
      * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Lead\Lead")
      */
-    private $lead;
+    public $lead;
 
     /**
      * @var CampaignTag
      *
      * @ODM\ReferenceOne(targetDocument="AppBundle\Document\TrackCampaignTag")
      */
-    private $campaignTag;
+    public $campaignTag;
 
     /**
      * Get id.
@@ -137,7 +137,7 @@ class TrackCampaignTag
     /**
      * Get updatedTs.
      *
-     * @return \DateTime
+     * @return string
      */
     public function getUpdatedTs()
     {

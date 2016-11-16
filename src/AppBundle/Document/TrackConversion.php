@@ -31,136 +31,136 @@ class TrackConversion
      * @ODM\Field(name="id", type="string")
      * @ODM\Id(strategy="UUID", type="string")
      */
-    private $id;
+    public $id;
 
     /**
      * @var string
      *
      * @ODM\Field(name="linkSubId", type="string", nullable=true)
      */
-    private $linkSubId;
+    public $linkSubId;
 
     /**
      * @var string
      *
      * @ODM\Field(name="orderId", type="string")
      */
-    private $orderId;
+    public $orderId;
 
     /**
      * @var bool
      *
      * @ODM\Field(name="linkActive", type="boolean")
      */
-    private $linkActive;
+    public $linkActive;
 
     /**
      * @var bool
      *
      * @ODM\Field(name="campaignActive", type="boolean")
      */
-    private $campaignActive;
+    public $campaignActive;
 
     /**
      * @var string
      *
      * @ODM\Field(name="referer", type="string", nullable=true)
      */
-    private $referer;
+    public $referer;
 
     /**
      * @var string
      *
      * @ODM\Field(name="cookie", type="string", nullable=true)
      */
-    private $cookie;
+    public $cookie;
 
     /**
      * @var string
      *
      * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Channel")
      */
-    private $channel;
+    public $channel;
 
     /**
      * @var string
      *
      * @ODM\Field(name="linkIp", type="string")
      */
-    private $linkIp;
+    public $linkIp;
 
     /**
      * @var string
      *
      * @ODM\Field(name="serverData", type="string")
      */
-    private $serverData;
+    public $serverData;
 
     /**
      * @var string
      *
      * @ODM\Field(name="forwardingUrl", type="string", nullable=true)
      */
-    private $forwardingUrl;
+    public $forwardingUrl;
 
     /**
      * @var string
      *
      * @ODM\Field(name="basketValue", type="string", nullable=true)
      */
-    private $basketValue;
+    public $basketValue;
 
     /**
      * @var string
      *
      * @ODM\Field(name="basketCurrency", type="string")
      */
-    private $basketCurrency;
+    public $basketCurrency;
 
     /**
      * @var string
      *
      * @ODM\Field(name="tagFiringUrl", type="string")
      */
-    private $tagFiringUrl;
+    public $tagFiringUrl;
 
     /**
      * @var string
      *
      * @ODM\Field(name="tagCookie", type="string", nullable=true)
      */
-    private $tagCookie;
+    public $tagCookie;
 
     /**
-     * @var \DateTime
+     * @var string
      *
      * @ODM\Field(name="createdTs", type="string")
      * @Gedmo\Timestampable(on="create")
      */
-    private $createdTs;
+    public $createdTs;
 
     /**
      * @var string
      *
      * @ODM\Field(name="tagIp", type="string")
      */
-    private $tagIp;
+    public $tagIp;
 
     /**
-     * @var \DateTime
+     * @var string
      *
      * @ODM\Field(name="updatedAt", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
-    private $updatedAt;
+    public $updatedAt;
 
     /**
      * @var bool
      *
      * @ODM\Field(name="visible", type="boolean")
      */
-    private $visible;
+    public $visible;
 
     /**
      * @var Publisher
@@ -168,7 +168,7 @@ class TrackConversion
      * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Publisher\Publisher", inversedBy="trackConversions")
      * @ODM\EmbedOne(targetDocument="AppBundle\Document\Publisher\Publisher")
      */
-    private $publisher;
+    public $publisher;
 
     /**
      * @var Campaign
@@ -176,7 +176,7 @@ class TrackConversion
      * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Campaign\Campaign", inversedBy="trackConversions")
      * @ODM\EmbedOne(targetDocument="AppBundle\Document\Campaign\Campaign")
      */
-    private $campaign;
+    public $campaign;
 
     /**
      * @var TrackClick
@@ -184,7 +184,7 @@ class TrackConversion
      * @ODM\ReferenceOne(targetDocument="AppBundle\Document\TrackClick", inversedBy="trackConversions")
      * @ODM\EmbedOne(targetDocument="AppBundle\Document\TrackClick")
      */
-    private $trackClick;
+    public $trackClick;
 
     /**
      * @var CampaignLink
@@ -192,7 +192,7 @@ class TrackConversion
      * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Campaign\CampaignLink", inversedBy="trackConversions")
      * @ODM\EmbedOne(targetDocument="AppBundle\Document\Campaign\CampaignLink")
      */
-    private $campaignLink;
+    public $campaignLink;
 
     /**
      * @var Lead
@@ -200,49 +200,49 @@ class TrackConversion
      * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Lead\Lead", inversedBy="trackConversion")
      * @ODM\EmbedOne(targetDocument="AppBundle\Document\Lead\Lead")
      */
-    private $lead;
+    public $lead;
 
     /**
      * @var CampaignPublisher
      *
      * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Campaign\CampaignPublisher", inversedBy="trackConversion")
      */
-    private $campaignPublisher;
+    public $campaignPublisher;
 
     /**
      * @var int
      *
      * @ODM\Field(name="publisherPayout", type="string", nullable=true)
      */
-    private $publisherPayout;
+    public $publisherPayout;
 
     /**
      * @var int
      *
      * @ODM\Field(name="advertiserPayout", type="string", nullable=true)
      */
-    private $advertiserPayout;
+    public $advertiserPayout;
 
     /**
      * @var int
      *
      * @ODM\Field(name="baseCurrencyPublisherPayout", type="string", nullable=true)
      */
-    private $baseCurrencyPublisherPayout;
+    public $baseCurrencyPublisherPayout;
 
     /**
      * @var int
      *
      * @ODM\Field(name="baseCurrencyAdvertiserPayout", type="string", nullable=true)
      */
-    private $baseCurrencyAdvertiserPayout;
+    public $baseCurrencyAdvertiserPayout;
 
     /**
      * @var Collection
      *
      * @ODM\ReferenceMany(targetDocument="AppBundle\Document\Lead\LeadFlagHistory", mappedBy="trackConversion")
      */
-    private $leadFlagHistory;
+    public $leadFlagHistory;
 
     public function __construct()
     {

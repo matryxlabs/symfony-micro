@@ -21,7 +21,7 @@ class CampaignTag
      * @ODM\Field(name="id", type="string")
      * @ODM\Id(strategy="UUID", type="string")
      */
-    private $id;
+    public $id;
 
     /**
      * @return int

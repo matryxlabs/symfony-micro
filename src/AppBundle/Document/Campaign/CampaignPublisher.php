@@ -25,7 +25,7 @@ class CampaignPublisher
      * @ODM\Field(name="id", type="string")
      * @ODM\Id(strategy="UUID", type="string")
      */
-    private $id;
+    public $id;
 
     /**
      * @var string
@@ -33,7 +33,7 @@ class CampaignPublisher
      * @ODM\Field(name="baseCurrencyPayout", type="string")
      * @Gedmo\Versioned
      */
-    private $baseCurrencyPayout;
+    public $baseCurrencyPayout;
 
     /**
      * @var string
@@ -41,7 +41,7 @@ class CampaignPublisher
      * @ODM\Field(name="payout", type="string")
      * @Gedmo\Versioned
      */
-    private $payout;
+    public $payout;
 
     /**
      * @var int
@@ -49,21 +49,21 @@ class CampaignPublisher
      * @ODM\Field(name="leadsRequired", type="integer")
      * @Gedmo\Versioned
      */
-    private $leadsRequired;
+    public $leadsRequired;
 
     /**
      * @var \DateTime
      *
      * @ODM\Field(name="startTs", type="string")
      */
-    private $startTs;
+    public $startTs;
 
     /**
      * @var \DateTime
      *
      * @ODM\Field(name="endTs", type="string", nullable=true)
      */
-    private $endTs;
+    public $endTs;
 
     /**
      * @var string
@@ -71,7 +71,7 @@ class CampaignPublisher
      * @ODM\Field(name="signName", type="string", nullable=true)
      * @Gedmo\Versioned
      */
-    private $signName;
+    public $signName;
 
     /**
      * @var string
@@ -79,7 +79,7 @@ class CampaignPublisher
      * @ODM\Field(name="signRole", type="string", nullable=true)
      * @Gedmo\Versioned
      */
-    private $signRole;
+    public $signRole;
 
     /**
      * @var \DateTime
@@ -87,7 +87,7 @@ class CampaignPublisher
      * @ODM\Field(name="signedTs", type="string", nullable=true)
      * @Gedmo\Versioned
      */
-    private $signedTs;
+    public $signedTs;
 
     /**
      * @var string
@@ -95,16 +95,16 @@ class CampaignPublisher
      * @ODM\Field(name="signedIp", type="string", nullable=true)
      * @Gedmo\Versioned
      */
-    private $signedIp;
+    public $signedIp;
 
     /**
-     * @var \DateTime
+     * @var string
      *
      * @ODM\Field(name="updatedTs", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
-    private $updatedTs;
+    public $updatedTs;
 
     /**
      * @var \DateTime
@@ -112,7 +112,7 @@ class CampaignPublisher
      * @ODM\Field(name="createdTs", type="string")
      * @Gedmo\Timestampable(on="create")
      */
-    private $createdTs;
+    public $createdTs;
 
     /**
      * @var string
@@ -120,28 +120,28 @@ class CampaignPublisher
      * @ODM\Field(name="terms", type="string", nullable=true)
      * @Gedmo\Versioned
      */
-    private $terms;
+    public $terms;
 
     /**
      * @var string
      *
      * @ODM\Field(name="linkHash", type="string")
      */
-    private $linkHash;
+    public $linkHash;
 
     /**
      * @var bool
      *
      * @ODM\Field(name="visible", type="boolean")
      */
-    private $visible;
+    public $visible;
 
     /**
      * @var string
      *
      * @ODM\Field(name="current", type="boolean")
      */
-    private $current = false;
+    public $current = false;
 
     /**
      * @var Campaign
@@ -149,21 +149,21 @@ class CampaignPublisher
      * @ODM\ReferenceOne(targetDocument="\AppBundle\Document\Campaign\Campaign", inversedBy="campaignPublishers")
      * @ODM\EmbedOne(targetDocument="\AppBundle\Document\Campaign\Campaign")
      */
-    private $campaign;
+    public $campaign;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ODM\ReferenceMany(targetDocument="AppBundle\Document\Lead\Lead", mappedBy="campaignPublisher", cascade={"persist"})
      */
-    private $leads;
+    public $leads;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackConversion", mappedBy="campaignPublisher", cascade={"persist"})
      */
-    private $trackConversion;
+    public $trackConversion;
 
     /**
      * @var Publisher
@@ -171,7 +171,7 @@ class CampaignPublisher
      * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Publisher\Publisher", inversedBy="campaignPublishers", cascade="persist")
      * @ODM\EmbedOne(targetDocument="AppBundle\Document\Publisher\Publisher")
      */
-    private $publisher;
+    public $publisher;
 
     /**
      * @return Publisher

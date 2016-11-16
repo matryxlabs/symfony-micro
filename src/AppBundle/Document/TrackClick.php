@@ -25,49 +25,49 @@ class TrackClick
      * @ODM\Field(name="id", type="string")
      * @ODM\Id(strategy="UUID", type="string")
      */
-    private $id;
+    public $id;
 
     /**
      * @var string
      *
      * @ODM\Field(name="linkSubId", type="string", nullable=true)
      */
-    private $linkSubId;
+    public $linkSubId;
 
     /**
      * @var bool
      *
      * @ODM\Field(name="linkEnabled", type="boolean")
      */
-    private $linkEnabled;
+    public $linkEnabled;
 
     /**
      * @var bool
      *
      * @ODM\Field(name="campaignEnabled", type="boolean")
      */
-    private $campaignEnabled;
+    public $campaignEnabled;
 
     /**
      * @var string
      *
      * @ODM\Field(name="serverSession", type="string")
      */
-    private $serverSession;
+    public $serverSession;
 
     /**
      * @var string
      *
      * @ODM\Field(name="referer", type="string", nullable=true)
      */
-    private $referer;
+    public $referer;
 
     /**
      * @var string
      *
      * @ODM\Field(name="cookie", type="string")
      */
-    private $cookie;
+    public $cookie;
 
     /**
      * @var \DateTime
@@ -76,56 +76,56 @@ class TrackClick
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
-    private $createdTs;
+    public $createdTs;
 
     /**
      * @var string
      *
      * @ODM\Field(name="ip", type="string")
      */
-    private $ip;
+    public $ip;
 
     /**
      * @var string
      *
      * @ODM\Field(name="serverData", type="string")
      */
-    private $serverData;
+    public $serverData;
 
     /**
      * @var string
      *
      * @ODM\Field(name="forwardingUrl", type="string")
      */
-    private $forwardingUrl;
+    public $forwardingUrl;
 
     /**
      * @var bool
      *
      * @ODM\Field(name="visible", type="boolean")
      */
-    private $visible;
+    public $visible;
 
     /**
      * @var int
      *
      * @ODM\Field(name="fingerprint", type="string", nullable=true)
      */
-    private $fingerprint;
+    public $fingerprint;
 
     /**
      * @var bool
      *
      * @ODM\Field(name="unroutable", type="boolean")
      */
-    private $unroutable = false;
+    public $unroutable = false;
 
     /**
      * @var Collection
      *
      * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackConversion", mappedBy="trackClick", cascade={"persist"})
      */
-    private $trackConversions;
+    public $trackConversions;
 
     /**
      * @var Publisher
@@ -133,7 +133,7 @@ class TrackClick
      * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Publisher\Publisher", inversedBy="trackClicks")
      * @ODM\EmbedOne(targetDocument="AppBundle\Document\Publisher\Publisher")
      */
-    private $publisher;
+    public $publisher;
 
     /**
      * @var CampaignLink
@@ -141,7 +141,7 @@ class TrackClick
      * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Campaign\CampaignLink", inversedBy="trackClicks")
      * @ODM\EmbedOne(targetDocument="AppBundle\Document\Campaign\CampaignLink")
      */
-    private $campaignLink;
+    public $campaignLink;
 
     /**
      * @var TrackImpression
@@ -149,7 +149,7 @@ class TrackClick
      * @ODM\ReferenceOne(targetDocument="TrackImpression", inversedBy="trackClicks")
      * @ODM\EmbedOne(targetDocument="TrackImpression")
      */
-    private $trackImpression;
+    public $trackImpression;
 
     /**
      * @var Collection

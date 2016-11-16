@@ -20,21 +20,21 @@ class TrackClickData
      * @ODM\Field(name="id", type="integer")
      * @ODM\Id(strategy="INCREMENT", type="integer")
      */
-    private $id;
+    public $id;
 
     /**
      * @var string
      *
      * @ODM\Field(name="name", type="string")
      */
-    private $name;
+    public $name;
 
     /**
      * @var string
      *
      * @ODM\Field(name="value", type="string")
      */
-    private $value;
+    public $value;
 
     /**
      * @var TrackClick

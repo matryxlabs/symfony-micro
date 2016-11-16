@@ -21,114 +21,114 @@ class StatisticsCampaign
      * @ODM\Field(name="id", type="string")
      * @ODM\Id(strategy="UUID", type="string")
      */
-    private $id;
+    public $id;
 
     /**
      * @var int
      *
      * @ODM\Field(name="liveImpressions", type="integer")
      */
-    private $liveImpressions;
+    public $liveImpressions;
 
     /**
      * @var int
      *
      * @ODM\Field(name="liveClicks", type="integer")
      */
-    private $liveClicks;
+    public $liveClicks;
 
     /**
      * @var int
      *
      * @ODM\Field(name="liveConversions", type="integer")
      */
-    private $liveConversions;
+    public $liveConversions;
 
     /**
      * @var int
      *
      * @ODM\Field(name="testImpressions", type="integer")
      */
-    private $testImpressions;
+    public $testImpressions;
 
     /**
      * @var int
      *
      * @ODM\Field(name="testClicks", type="integer")
      */
-    private $testClicks;
+    public $testClicks;
 
     /**
      * @var int
      *
      * @ODM\Field(name="testConversions", type="integer")
      */
-    private $testConversions;
+    public $testConversions;
 
     /**
      * @var int
      *
      * @ODM\Field(name="conversionsRequired", type="integer")
      */
-    private $conversionsRequired;
+    public $conversionsRequired;
 
     /**
      * @var \DateTime
      *
      * @ODM\Field(name="firstLiveImpression", type="string")
      */
-    private $firstLiveImpression;
+    public $firstLiveImpression;
 
     /**
      * @var \DateTime
      *
      * @ODM\Field(name="firstLiveClick", type="string")
      */
-    private $firstLiveClick;
+    public $firstLiveClick;
 
     /**
      * @var \DateTime
      *
      * @ODM\Field(name="firstLiveConversion", type="string")
      */
-    private $firstLiveConversion;
+    public $firstLiveConversion;
 
     /**
      * @var \DateTime
      *
      * @ODM\Field(name="lastLiveConversion", type="string")
      */
-    private $lastLiveConversion;
+    public $lastLiveConversion;
 
     /**
      * @var \DateTime
      *
      * @ODM\Field(name="lastLiveImpression", type="string")
      */
-    private $lastLiveImpression;
+    public $lastLiveImpression;
 
     /**
      * @var \DateTime
      *
      * @ODM\Field(name="lastLiveClick", type="string")
      */
-    private $lastLiveClick;
+    public $lastLiveClick;
 
     /**
-     * @var \DateTime
+     * @var string
      *
      * @ODM\Field(name="updatedTs", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
-    private $updatedTs;
+    public $updatedTs;
 
     /**
      * @var bool
      *
      * @ODM\Field(name="visible", type="boolean")
      */
-    private $visible;
+    public $visible;
 
     /**
      * @var Campaign
@@ -136,7 +136,7 @@ class StatisticsCampaign
      * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Campaign\Campaign", inversedBy="statisticsCampaigns")
      * @ODM\EmbedOne(targetDocument="AppBundle\Document\Campaign\Campaign")
      */
-    private $campaign;
+    public $campaign;
 
     /**
      * Get id.

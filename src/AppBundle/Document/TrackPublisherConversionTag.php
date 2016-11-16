@@ -25,51 +25,51 @@ class TrackPublisherConversionTag
      * @ODM\Field(name="id", type="integer")
      * @ODM\Id(strategy="INCREMENT", type="integer")
      */
-    private $id;
+    public $id;
 
     /**
      * @var string
      *
      * @ODM\Field(name="linkSubId", type="string", nullable=true)
      */
-    private $linkSubId;
+    public $linkSubId;
 
     /**
      * @var string
      *
      * @ODM\Field(name="request", type="string")
      */
-    private $request;
+    public $request;
 
     /**
      * @var string
      *
      * @ODM\Field(name="response", type="string")
      */
-    private $response;
+    public $response;
 
     /**
-     * @var \DateTime
+     * @var string
      *
      * @ODM\Field(name="updateTs", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
-    private $updateTs;
+    public $updateTs;
 
     /**
      * @var string
      *
      * @ODM\Field(name="ip", type="string")
      */
-    private $ip;
+    public $ip;
 
     /**
      * @var bool
      *
      * @ODM\Field(name="visible", type="boolean")
      */
-    private $visible;
+    public $visible;
 
     /**
      * @var Publisher
@@ -77,7 +77,7 @@ class TrackPublisherConversionTag
      * @ODM\ReferenceOne(targetDocument="\AppBundle\Document\Publisher\Publisher")
      * @ODM\EmbedOne(targetDocument="\AppBundle\Document\Publisher\Publisher")
      */
-    private $publisher;
+    public $publisher;
 
     /**
      * @var Campaign
@@ -85,7 +85,7 @@ class TrackPublisherConversionTag
      * @ODM\ReferenceOne(targetDocument="\AppBundle\Document\Campaign\Campaign")
      * @ODM\EmbedOne(targetDocument="\AppBundle\Document\Campaign\Campaign")
      */
-    private $campaign;
+    public $campaign;
 
     /**
      * @var CampaignLink
@@ -93,7 +93,7 @@ class TrackPublisherConversionTag
      * @ODM\ReferenceOne(targetDocument="\AppBundle\Document\Campaign\CampaignLink")
      * @ODM\EmbedOne(targetDocument="\AppBundle\Document\Campaign\CampaignLink")
      */
-    private $campaignLink;
+    public $campaignLink;
 
     /**
      * @var Lead
@@ -101,14 +101,14 @@ class TrackPublisherConversionTag
      * @ODM\ReferenceOne(targetDocument="\AppBundle\Document\Lead\Lead")
      * @ODM\EmbedOne(targetDocument="\AppBundle\Document\Lead\Lead")
      */
-    private $lead;
+    public $lead;
 
     /**
      * @var string
      *
      * @ODM\Field(name="orderId", type="string", nullable=true)
      */
-    private $orderId;
+    public $orderId;
 
     /**
      * Get id.

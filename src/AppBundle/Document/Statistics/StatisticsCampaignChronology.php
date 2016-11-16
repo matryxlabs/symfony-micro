@@ -24,121 +24,121 @@ class StatisticsCampaignChronology
      * @ODM\Field(name="id", type="string")
      * @ODM\Id(strategy="UUID", type="string")
      */
-    private $id;
+    public $id;
 
     /**
      * @var \DateTime
      *
      * @ODM\Field(name="reportTs", type="string")
      */
-    private $reportTs;
+    public $reportTs;
 
     /**
      * @var int
      *
      * @ODM\Field(name="liveImpressions", type="integer")
      */
-    private $liveImpressions = 0;
+    public $liveImpressions = 0;
 
     /**
      * @var int
      *
      * @ODM\Field(name="liveClicks", type="integer")
      */
-    private $liveClicks = 0;
+    public $liveClicks = 0;
 
     /**
      * @var int
      *
      * @ODM\Field(name="liveConversions", type="integer")
      */
-    private $liveConversions = 0;
+    public $liveConversions = 0;
 
     /**
      * @var int
      *
      * @ODM\Field(name="testImpressions", type="integer")
      */
-    private $testImpressions = 0;
+    public $testImpressions = 0;
 
     /**
      * @var int
      *
      * @ODM\Field(name="testClicks", type="integer")
      */
-    private $testClicks = 0;
+    public $testClicks = 0;
 
     /**
      * @var int
      *
      * @ODM\Field(name="testConversions", type="integer")
      */
-    private $testConversions = 0;
+    public $testConversions = 0;
 
     /**
      * @var int
      *
      * @ODM\Field(name="conversionsRequiredFromPublisher", type="integer", nullable=true)
      */
-    private $conversionsRequiredFromPublisher;
+    public $conversionsRequiredFromPublisher;
 
     /**
      * @var \DateTime
      *
      * @ODM\Field(name="firstLiveImpression", type="string", nullable=true)
      */
-    private $firstLiveImpression;
+    public $firstLiveImpression;
 
     /**
      * @var \DateTime
      *
      * @ODM\Field(name="firstLiveClick", type="string", nullable=true)
      */
-    private $firstLiveClick;
+    public $firstLiveClick;
 
     /**
      * @var \DateTime
      *
      * @ODM\Field(name="firstLiveConversion", type="string", nullable=true)
      */
-    private $firstLiveConversion;
+    public $firstLiveConversion;
 
     /**
      * @var \DateTime
      *
      * @ODM\Field(name="lastLiveConversion", type="string", nullable=true)
      */
-    private $lastLiveConversion;
+    public $lastLiveConversion;
 
     /**
      * @var \DateTime
      *
      * @ODM\Field(name="lastLiveImpression", type="string", nullable=true)
      */
-    private $lastLiveImpression;
+    public $lastLiveImpression;
 
     /**
      * @var \DateTime
      *
      * @ODM\Field(name="lastLiveClick", type="string", nullable=true)
      */
-    private $lastLiveClick;
+    public $lastLiveClick;
 
     /**
-     * @var \DateTime
+     * @var string
      *
      * @ODM\Field(name="updatedTs", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
-    private $updatedTs;
+    public $updatedTs;
 
     /**
      * @var bool
      *
      * @ODM\Field(name="visible", type="boolean")
      */
-    private $visible;
+    public $visible;
 
     /**
      * @var Campaign
@@ -146,7 +146,7 @@ class StatisticsCampaignChronology
      * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Campaign\Campaign", inversedBy="statisticsCampaignChronologies")
      * @ODM\EmbedOne(targetDocument="AppBundle\Document\Campaign\Campaign")
      */
-    private $campaign;
+    public $campaign;
 
     /**
      * @var Publisher
@@ -154,7 +154,7 @@ class StatisticsCampaignChronology
      * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Publisher\Publisher", inversedBy="statisticsCampaignChronologies")
      * @ODM\EmbedOne(targetDocument="AppBundle\Document\Publisher\Publisher")
      */
-    private $publisher;
+    public $publisher;
 
     /**
      * @var CampaignLink
@@ -162,7 +162,7 @@ class StatisticsCampaignChronology
      * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Campaign\CampaignLink")
      * @ODM\EmbedOne(targetDocument="AppBundle\Document\Campaign\CampaignLink")
      */
-    private $link;
+    public $link;
 
     /**
      * Get id.

@@ -177,6 +177,23 @@ class CampaignPublisher
      */
     private $publisher;
 
+
+    /**
+     * @return Publisher
+     */
+    public function getPublisher()
+    {
+        return $this->publisher;
+    }
+
+    /**
+     * @param Publisher $publisher
+     */
+    public function setPublisher($publisher)
+    {
+        $this->publisher = $publisher;
+    }
+
     /**
      * Get id.
      *

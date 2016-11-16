@@ -24,14 +24,14 @@ class LeadFlag
      * @ODM\Field(name="id", type="string")
      * @ODM\Id(strategy="UUID", type="string")
      */
-    private $id;
+    public $id;
 
     /**
      * @var string
      *
      * @ODM\Field(name="name", type="string")
      */
-    private $name;
+    public $name;
 
     /**
      * Get id.

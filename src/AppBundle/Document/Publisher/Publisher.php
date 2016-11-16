@@ -17,7 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * Publisher.
  *
  * @ODM\Collection(name="Publisher")
- * @ODM\Document
+ * @ODM\Document()
  * @ODM\HasLifecycleCallbacks
  * @ODM\ChangeTrackingPolicy("NOTIFY")
  */
@@ -29,114 +29,114 @@ class Publisher
      * @ODM\Field(name="id", type="string")
      * @ODM\Id(strategy="UUID", type="string")
      */
-    private $id;
+    public $id;
 
     /**
      * @var string
      *
      * @ODM\Field(name="orgname", type="string")
      */
-    private $orgname;
+    public $orgname;
 
     /**
      * @var string
      *
      * @ODM\Field(name="orgurl", type="string")
      */
-    private $orgurl;
+    public $orgurl;
 
     /**
      * @var string
      *
      * @ODM\Field(name="logo", type="string", nullable=true)
      */
-    private $logo;
+    public $logo;
 
     /**
      * @var string
      *
      * @ODM\Field(name="taxclass", type="string", nullable=true)
      */
-    private $taxclass;
+    public $taxclass;
 
     /**
      * @var int
      *
      * @ODM\Field(name="companyNumber", type="string", nullable=true)
      */
-    private $companyNumber;
+    public $companyNumber;
 
     /**
      * @var string
      *
      * @ODM\Field(name="notes", type="string", nullable=true)
      */
-    private $notes;
+    public $notes;
 
     /**
-     * @var \DateTime
+     * @var string
      *
      * @ODM\Field(name="updatedTs", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
-    private $updatedTs;
+    public $updatedTs;
 
     /**
      * @var bool
      *
      * @ODM\Field(name="visible", type="boolean")
      */
-    private $visible;
+    public $visible;
 
     /**
      * @var string
      *
      * @ODM\Field(name="verified", type="string")
      */
-    private $verified;
+    public $verified;
 
     /**
      * @var string
      *
      * @ODM\Field(name="source", type="string")
      */
-    private $source;
+    public $source;
 
     /**
      * @var string
      *
      * @ODM\Field(name="defaultSubId", type="string", nullable=true)
      */
-    private $defaultSubId;
+    public $defaultSubId;
 
     /**
      * @var string
      *
      * @ODM\Field(name="defaultLeadTagType", type="string", nullable=true)
      */
-    private $defaultLeadTagType;
+    public $defaultLeadTagType;
 
     /**
      * @var string
      *
      * @ODM\Field(name="defaultLeadTag", type="string", nullable=true)
      */
-    private $defaultLeadTag;
+    public $defaultLeadTag;
 
     /**
      * @var string
      *
      * @ODM\Field(name="signupToken", type="string", nullable=true)
      */
-    private $signupToken;
+    public $signupToken;
 
     /**
      * @var
      *
      * @ODM\Field(name="oldPublisherId", type="integer", nullable=true)
      */
-    private $oldPublisherId;
+    public $oldPublisherId;
 
     /**
      * @var Collection
@@ -144,7 +144,7 @@ class Publisher
      * @ODM\ReferenceMany(targetDocument="AppBundle\Document\Lead\Lead", mappedBy="publisher", cascade={"persist"})
      * @ODM\EmbedMany(targetDocument="AppBundle\Document\Lead\Lead")
      */
-    private $leads;
+    public $leads;
 
     /**
      * @var Collection
@@ -152,7 +152,7 @@ class Publisher
      * @ODM\ReferenceMany(targetDocument="AppBundle\Document\Campaign\CampaignPublisher", mappedBy="publisher", cascade={"persist"})
      * @ODM\EmbedMany(targetDocument="AppBundle\Document\Campaign\CampaignPublisher")
      */
-    private $campaignPublishers;
+    public $campaignPublishers;
 
     /**
      * @var Collection
@@ -160,7 +160,7 @@ class Publisher
      * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackClick", mappedBy="publisher", cascade={"persist"})
      * @ODM\EmbedMany(targetDocument="AppBundle\Document\TrackClick")
      */
-    private $trackClicks;
+    public $trackClicks;
 
     /**
      * @var Collection
@@ -168,7 +168,7 @@ class Publisher
      * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackConversion", mappedBy="publisher", cascade={"persist"})
      * @ODM\EmbedMany(targetDocument="AppBundle\Document\TrackConversion")
      */
-    private $trackConversions;
+    public $trackConversions;
 
     /**
      * @var Collection
@@ -176,7 +176,7 @@ class Publisher
      * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackImpression", mappedBy="publisher", cascade={"persist"})
      * @ODM\EmbedMany(targetDocument="AppBundle\Document\TrackImpression")
      */
-    private $trackImpressions;
+    public $trackImpressions;
 
     /**
      * @var Collection
@@ -184,7 +184,7 @@ class Publisher
      * @ODM\ReferenceMany(targetDocument="AppBundle\Document\Statistics\StatisticsCampaignChronology", mappedBy="publisher", cascade={"persist"})
      * @ODM\EmbedMany(targetDocument="AppBundle\Document\Statistics\StatisticsCampaignChronology")
      */
-    private $statisticsCampaignChronologies;
+    public $statisticsCampaignChronologies;
     /**
      * Constructor.
      */

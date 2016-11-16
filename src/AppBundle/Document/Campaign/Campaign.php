@@ -10,7 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Campaign.
  *
  * @ODM\Collection(name="Campaign")
- * @ODM\Document
+ * @ODM\Document()
  * @ODM\HasLifecycleCallbacks
  * @ODM\ChangeTrackingPolicy("NOTIFY")
  * @Gedmo\Loggable(logEntryClass="\AppBundle\Document\Campaign\CampaignLogEntry")
@@ -23,7 +23,7 @@ class Campaign
      * @ODM\Field(name="id", type="string")
      * @ODM\Id(strategy="UUID", type="string")
      */
-    private $id;
+    public $id;
 
     /**
      * @var Collection
@@ -31,7 +31,7 @@ class Campaign
      * @ODM\ReferenceMany(targetDocument="\AppBundle\Document\Campaign\CampaignLink", mappedBy="campaign", cascade={"persist"})
      * @ODM\EmbedMany(targetDocument="\AppBundle\Document\Campaign\CampaignLink")
      */
-    private $campaignLinks;
+    public $campaignLinks;
 
     /**
      * @var Collection
@@ -39,7 +39,7 @@ class Campaign
      * @ODM\ReferenceMany(targetDocument="AppBundle\Document\Campaign\CampaignPublisher", mappedBy="campaign", cascade={"persist"})
      * @ODM\EmbedMany(targetDocument="AppBundle\Document\Campaign\CampaignPublisher")
      */
-    private $campaignPublishers;
+    public $campaignPublishers;
 
     /**
      * @var Collection
@@ -47,7 +47,7 @@ class Campaign
      * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackConversion", mappedBy="campaign", cascade={"persist"})
      * @ODM\EmbedMany(targetDocument="AppBundle\Document\TrackConversion")
      */
-    private $trackConversions;
+    public $trackConversions;
 
     /**
      * @var Collection
@@ -55,23 +55,23 @@ class Campaign
      * @ODM\ReferenceMany(targetDocument="AppBundle\Document\Statistics\StatisticsCampaign", mappedBy="campaign", cascade={"persist"})
      * @ODM\EmbedMany(targetDocument="AppBundle\Document\Statistics\StatisticsCampaign")
      */
-    private $statisticsCampaigns;
+    public $statisticsCampaigns;
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ODM\ReferenceMany(targetDocument="AppBundle\Document\Statistics\StatisticsCampaignChronology", mappedBy="campaign", cascade={"persist"})
      * @ODM\EmbedMany(targetDocument="AppBundle\Document\Statistics\StatisticsCampaignChronology")
      */
-    private $statisticsCampaignChronologies;
+    public $statisticsCampaignChronologies;
 
     /**
-     * @var \DateTime
+     * @var string
      *
      * @ODM\Field(name="updatedTs", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
-    private $updatedTs;
+    public $updatedTs;
 
     /**
      * @return int
@@ -107,7 +107,7 @@ class Campaign
     /**
      * Set updatedTs.
      *
-     * @param \DateTime $updatedTs
+     * @param  $updatedTs
      *
      * @return Campaign
      */

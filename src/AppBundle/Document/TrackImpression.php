@@ -24,60 +24,55 @@ class TrackImpression
      * @ODM\Field(name="id", type="string")
      * @ODM\Id(strategy="UUID", type="string")
      */
-    private $id;
+    public $id;
 
     /**
      * @var string
      *
      * @ODM\Field(name="referer", type="string", nullable=true)
      */
-    private $referer;
+    public $referer;
 
     /**
      * @var string
      *
      * @ODM\Field(name="ip", type="string")
      */
-    private $ip;
+    public $ip;
 
     /**
-     * @var \DateTime
+     * @var string
      *
      * @ODM\Field(name="updatedTs", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
-    private $updatedTs;
+    public $updatedTs;
 
     /**
      * @var bool
      *
      * @ODM\Field(name="visible", type="boolean")
      */
-    private $visible;
+    public $visible;
 
     /**
      * @var Collection
      *
      * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackClick", mappedBy="trackImpression", cascade={"persist"})
      */
-    private $trackClicks;
+    public $trackClicks;
 
     /**
-     * @var \AppBundle\Document\Publisher\Publisher
+     * @var string
      *
-     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Publisher\Publisher", inversedBy="trackImpressions")
-     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Publisher\Publisher")
      */
-    private $publisher;
+    public $publisher;
 
     /**
-     * @var CampaignLink
-     *
-     * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Campaign\CampaignLink", inversedBy="trackImpressions")
-     * @ODM\EmbedOne(targetDocument="AppBundle\Document\Campaign\CampaignLink")
+     * @var string
      */
-    private $campaignLink;
+    public $campaignLink;
 
     /**
      * Constructor.

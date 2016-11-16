@@ -26,7 +26,7 @@ class CampaignLink
      * @ODM\Field(name="id", type="string")
      * @ODM\Id(strategy="UUID", type="string")
      */
-    private $id;
+    public $id;
 
     /**
      * @var string
@@ -34,7 +34,7 @@ class CampaignLink
      * @ODM\Field(name="name", type="string")
      * @Gedmo\Versioned
      */
-    private $name;
+    public $name;
 
     /**
      * @var string
@@ -42,7 +42,7 @@ class CampaignLink
      * @ODM\Field(name="destination", type="string")
      * @Gedmo\Versioned
      */
-    private $destination;
+    public $destination;
 
     /**
      * @var bool
@@ -50,7 +50,7 @@ class CampaignLink
      * @ODM\Field(name="enabled", type="boolean")
      * @Gedmo\Versioned
      */
-    private $enabled;
+    public $enabled;
 
     /**
      * @var string
@@ -58,7 +58,7 @@ class CampaignLink
      * @ODM\Field(name="placeholder", type="string", nullable=true)
      * @Gedmo\Versioned
      */
-    private $placeholder;
+    public $placeholder;
 
     /**
      * @var string
@@ -66,7 +66,7 @@ class CampaignLink
      * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Channel")
      * @Gedmo\Versioned
      */
-    private $channel;
+    public $channel;
 
     /**
      * @var \DateTime
@@ -74,7 +74,7 @@ class CampaignLink
      * @ODM\Field(name="createdTs", type="string")
      * @Gedmo\Timestampable(on="create")
      */
-    private $createdTs;
+    public $createdTs;
 
     /**
      * @var string
@@ -82,23 +82,23 @@ class CampaignLink
      * @ODM\Field(name="description", type="string", nullable=true)
      * @Gedmo\Versioned
      */
-    private $description;
+    public $description;
 
     /**
      * @var string
      *
      * @ODM\Field(name="showOnWebsite", type="boolean")
      */
-    private $showOnWebsite = 0;
+    public $showOnWebsite = 0;
 
     /**
-     * @var \DateTime
+     * @var string
      *
      * @ODM\Field(name="updatedTs", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
-    private $updatedTs;
+    public $updatedTs;
 
     /**setUpdatedTs
      * @var bool
@@ -106,35 +106,35 @@ class CampaignLink
      * @ODM\Field(name="visible", type="boolean")
      * @Gedmo\Versioned
      */
-    private $visible;
+    public $visible;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackClick", mappedBy="campaignLink", cascade={"persist"})
      */
-    private $trackClicks;
+    public $trackClicks;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackConversion", mappedBy="campaignLink", cascade={"persist"})
      */
-    private $trackConversions;
+    public $trackConversions;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ODM\ReferenceMany(targetDocument="AppBundle\Document\TrackImpression", mappedBy="campaignLink", cascade={"persist"})
      */
-    private $trackImpressions;
+    public $trackImpressions;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ODM\ReferenceMany(targetDocument="AppBundle\Document\Lead\Lead", mappedBy="campaignLink", cascade={"persist"})
      */
-    private $leads;
+    public $leads;
 
     /**
      * @var Campaign
@@ -142,7 +142,7 @@ class CampaignLink
      * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Campaign\Campaign", inversedBy="campaignLinks")
      * @ODM\EmbedOne(targetDocument="AppBundle\Document\Campaign\Campaign")
      */
-    private $campaign;
+    public $campaign;
     /**
      * Constructor.
      */

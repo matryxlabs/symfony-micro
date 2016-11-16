@@ -29,23 +29,23 @@ class Channel
      * @ODM\Field(name="id", type="integer")
      * @ODM\Id(strategy="INCREMENT", type="integer")
      */
-    private $id;
+    public $id;
 
     /**
      * @var string
      *
      * @ODM\Field(name="name", type="string")
      */
-    private $name;
+    public $name;
 
     /**
-     * @var \DateTime
+     * @var string
      *
      * @ODM\Field(name="updatedTs", type="string")
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
-    private $updatedTs;
+    public $updatedTs;
 
     /**
      * Get id.

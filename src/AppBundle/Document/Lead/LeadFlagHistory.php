@@ -22,14 +22,14 @@ class LeadFlagHistory
      * @ODM\Field(name="id", type="integer")
      * @ODM\Id(strategy="INCREMENT", type="integer")
      */
-    private $id;
+    public $id;
 
     /**
      * @var string
      *
      * @ODM\Field(name="reason", type="string")
      */
-    private $reason;
+    public $reason;
 
     /**
      * @var \DateTime
@@ -38,28 +38,28 @@ class LeadFlagHistory
      * @Gedmo\Timestampable(on="update")
      * @Gedmo\Timestampable(on="create")
      */
-    private $createdTs;
+    public $createdTs;
 
     /**
      * @var LeadFlag
      *
      * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Lead\LeadFlag")
      */
-    private $leadFlag;
+    public $leadFlag;
     
     /**
      * @var Lead
      *
      * @ODM\ReferenceOne(targetDocument="AppBundle\Document\Lead\Lead", inversedBy="leadFlagHistory")
      */
-    private $lead;
+    public $lead;
 
     /**
      * @var Lead
      *
      * @ODM\ReferenceOne(targetDocument="AppBundle\Document\TrackConversion", inversedBy="leadFlagHistory")
      */
-    private $trackConversion;
+    public $trackConversion;
 
     /**
      * Get id.
