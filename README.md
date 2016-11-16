@@ -1,7 +1,7 @@
 # Symfony MicroKernel Skeleton
 ## Not populated database
 
-## Mongodb benchmark (0% failed)
+## Mongodb benchmark (0 req failed)
 <pre>
 Server Software:        Apache/2.4.18
 Server Hostname:        symfony-micro.dev
@@ -39,7 +39,7 @@ Percentage of the requests served within a certain time (ms)
   99%   2398
  100%   7694 (longest request)
 </pre>
-### Mysql benchmark (46% failed)
+### Mysql benchmark (2300 req failed)
 <pre>
 Server Software:        Apache/2.4.18
 Server Hostname:        symfony-micro.dev
