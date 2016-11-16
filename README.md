@@ -2,7 +2,7 @@
 ## Not populated database
 
 ## Mongodb benchmark (%0 failed)
-<code>
+<pre>
 Server Software:        Apache/2.4.18
 Server Hostname:        symfony-micro.dev
 Server Port:            80
@@ -39,9 +39,9 @@ Percentage of the requests served within a certain time (ms)
   98%   2210
   99%   2398
  100%   7694 (longest request)
-</code>
+</pre>
 ### Mysql benchmark (46% failed)
-<code>
+<pre>
 Server Software:        Apache/2.4.18
 Server Hostname:        symfony-micro.dev
 Server Port:            80
@@ -79,4 +79,4 @@ Percentage of the requests served within a certain time (ms)
   98%    976
   99%   1062
  100%   8981 (longest request)
-</code>
+</pre>
